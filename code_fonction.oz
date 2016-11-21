@@ -1,6 +1,6 @@
 %====INFORMATION====%
 % LFSAB1402 Projet 2016
-% Nomas : NOMA1-NOMA2
+% Nomas : 08891500-NOMA2
 % Noms : (Nom1,Prenom1)-(Nom2,Prenom2)
 %====MODULELINK====%
 declare
