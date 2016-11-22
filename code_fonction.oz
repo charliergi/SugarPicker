@@ -68,11 +68,24 @@ in
 	    case Ru of nil then nil
 	    [] primitive(kind:K) then
 	       if K == road then
-		  realitem(kind:road p1:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-(Rx*0.0)+Dx)*{Cos Theta}) p2:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-(Rx*0.0)+Dx*{Cos Theta})
+		  realitem(kind:road
+			   p1:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Cos Theta})
+			   p2:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Cos Theta})
+			   )
 	       elseif K == building then
-		  realitem(kind:building p1:pt(x:(Rx*0.)0+Dx y:(Ry*0.0)+Dy) p2:pt(x:(Rx*1.0)+Dx y:(Ry*0.0)+Dy) p3:pt(x:(Rx*1.0)+Dx y:(Ry*1.0)+Dy) p4:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-(Rx*0.0)+Dx)*{Cos Theta))
+		  realitem(kind:building
+			   p1:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Cos Theta})
+			   p2:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Cos Theta})
+			   p3:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Cos Theta})
+			   p4:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Cos Theta})
+			   )
 	       else
-		  realitem(kind:water p1:pt(x:(Rx*0.)0+Dx y:(Ry*0.0)+Dy) p2:pt(x:(Rx*1.0)+Dx y:(Ry*0.0)+Dy) p3:pt(x:(Rx*1.0)+Dx y:(Ry*1.0)+Dy) p4:pt(x:(Rx*1.0)+Dx y:(Ry*1.0)+Dy))
+		  realitem(kind:water
+			   p1:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Cos Theta})
+			   p2:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Cos Theta})
+			   p3:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Cos Theta})
+			   p4:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Cos Theta})
+			   )
 	       end
 	    end
 	 end
