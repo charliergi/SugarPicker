@@ -54,25 +54,25 @@ in
 	 % Stocke les donnees des RU pour creer un RUI
 	 % /!\ Les valeurs Dx Dy sont considerees comme 0.0 si on utilise translate
 	 % /!\ Les valeurs Rx Ry sont considerees comme 0.0 si on utilise scale
-	 fun{Change Ru Rx Ry Dx Dy}  
+	 fun{Change Ru Rx Ry Dx Dy Theta}  
 	       case Ru of nil then nil
-	       [] primitive(kind:K) then {Create Ru Rx Ry Dx Dy}
-	       [] scale(rx:RX ry:RY 1:RU) then {Change RU RX RY Dx Dy}
-	       [] translate(dx:DX dy:DY 1:RU) then {Change RU Rx Ry DX DY}
-	       end 
+	       [] primitive(kind:K) then {Create Ru Rx Ry Dx Dy Theta}
+	       [] scale(rx:RX ry:RY 1:RU) then {Change RU RX RY Dx Dy Theta}
+	       [] translate(dx:DX dy:DY 1:RU) then {Change RU Rx Ry DX DY Theta}
+	       [] rotate(angle: X 1:RU) then  {Change RU Rx Ry Dx Dy X}
 	 end
 	 %Cree un RUI a l'aide d'une primitive et des coefficient en X et Y.
 	 %%TODO changer la definition des points
-	 fun{Create Ru Rx Ry Dx Dy }
+	 fun{Create Ru Rx Ry Dx Dy Theta}
 	    
 	    case Ru of nil then nil
 	    [] primitive(kind:K) then
 	       if K == road then
-		  realitem(kind:road p1:pt(x:Rx*(0.0+Dx) y:Ry*(0.0+Dy)) p2:pt(x:Rx*(1.0+Dx) y:Ry*(0.0+Dy)))
+		  realitem(kind:road p1:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-(Rx*0.0)+Dx)*{Cos Theta}) p2:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-(Rx*0.0)+Dx*{Cos Theta})
 	       elseif K == building then
-		  realitem(kind:building p1:pt(x:Rx*(0.0+Dx) y:Ry*(0.0+Dy)) p2:pt(x:Rx*(1.0+Dx) y:Ry*(0.0+Dy)) p3:pt(x:Rx*(1.0+Dx) y:Ry*(1.0+Dy)) p4:pt(x:Rx*(1.0+Dx) y:Ry*(1.0+Dy)))
+		  realitem(kind:building p1:pt(x:(Rx*0.)0+Dx y:(Ry*0.0)+Dy) p2:pt(x:(Rx*1.0)+Dx y:(Ry*0.0)+Dy) p3:pt(x:(Rx*1.0)+Dx y:(Ry*1.0)+Dy) p4:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-(Rx*0.0)+Dx)*{Cos Theta))
 	       else
-		  nil
+		  realitem(kind:water p1:pt(x:(Rx*0.)0+Dx y:(Ry*0.0)+Dy) p2:pt(x:(Rx*1.0)+Dx y:(Ry*0.0)+Dy) p3:pt(x:(Rx*1.0)+Dx y:(Ry*1.0)+Dy) p4:pt(x:(Rx*1.0)+Dx y:(Ry*1.0)+Dy))
 	       end
 	    end
 	 end
