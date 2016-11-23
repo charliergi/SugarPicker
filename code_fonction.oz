@@ -23,7 +23,7 @@ local
 		   )
    
 in
-   Map = map(ru:[rotate(angle:0.07 1:scale(rx:100.0 ry:100.0 1:translate(dx:250.0 dy:250.0 1:primitive(kind:road))))] pu:[translate(dx:time dy:time 1:primitive(kind:pokemon))]) %% TODO change the map here
+   Map = map(ru:[rotate(angle:0.07 1:scale(rx:100.0 ry:100.0 1:translate(dx:250.0 dy:250.0 1:primitive(kind:road)))) rotate(angle:0.07 1:scale(rx:100.0 ry:100.0 1:translate(dx:200.0 dy:200.0 1:primitive(kind:road)))) ] pu:[translate(dx:time dy:time 1:primitive(kind:arena))]) %% TODO change the map here
    
    %%prend une Map en parametre et retourne une liste de fonction annonymes qui renvoie chacune un element a afficher.
    fun{MyFunction Map }
@@ -81,11 +81,12 @@ in
 	 fun{ChangeForPu Pu Time Check}
 	    case Pu of nil then nil
 	    [] primitive(kind:K) then
+	       {Browse Time}
 	       if Check == true then {Create Pu 0.0 0.0 0.0 0.0 0.0 Time}
 	       else
 	       {Create Pu 0.0 0.0 0.0 0.0 0.0 0.0}
 	       end
-	    [] translate(dx:Time dy:Time 1:PU) then {ChangeForPu PU Time true}
+	    [] translate(dx:Timer dy:Timer2 1:PU) then {ChangeForPu PU Time true}
 	    end
 	 end
 	 
@@ -116,12 +117,11 @@ in
 			   p4:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Sin Theta})
 			  )
 	       elseif K==pokemon then
-		  {Browse Time}
 		  pokeitem(kind:pokemon position:pt(x:150.0+Time y:150.0+Time))
 	       elseif K==pokestop then
-		  pokeitem(kind:pokestop position:pt(x:0.0+Time y:0.0+Time))
+		  pokeitem(kind:pokestop position:pt(x:250.0+Time y:250.0+Time))
 	       elseif K==arena then
-		  pokeitem(kind:arena position:pt(x:0.0+Time y:0.0+Time))
+		  pokeitem(kind:arena position:pt(x:350.0+Time y:350.0+Time))
 	       else
 		  yolo	  
 	       end
@@ -130,7 +130,7 @@ in
 	 {Separate Map _ _}
       end
    end
-   
+  
    
    
    
