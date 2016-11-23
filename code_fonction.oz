@@ -89,6 +89,31 @@ in
 	    [] translate(dx:Timer dy:Timer2 1:PU) then {ChangeForPu PU Time true}
 	    end
 	 end
+
+         %Calcule la Formule (Data) passée en paramètre
+	 fun{Calculate Data Time}
+	    case Data of nil then 0
+	    [] plus(1:X 2:Y) then
+	       {Calculate X Time} + {Calculate Y Time}
+	    [] minus(1:X 2:Y) then
+	       {Calculate X Time} - {Calculate Y Time}
+	    [] mult(1:X 2:Y) then
+	       {Calculate X Time} * {Calculate Y Time}
+	    []'div'(1:X 2:Y) then
+	       {Calculate X Time} / {Calculate Y Time}
+	    [] sin(1:X) then
+	       {Calculate {Float.sin X} Time}
+	    [] cos(1:X) then
+	       {Calculate {Float.cos X} Time}
+	    [] tan(1:X) then
+	       {Calculate {Float.tan X} Time}
+	    else
+	       Data
+	    end
+	 end
+	 
+	     
+	       
 	 
 	 %Cree un RUI a l'aide d'une primitive et des coefficient en X et Y.
 	 %%TODO changer la definition des points
