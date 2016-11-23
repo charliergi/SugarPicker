@@ -4,7 +4,7 @@
 % Noms : (Nom1,Prenom1)-(Nom2,Prenom2)
 %====MODULELINK====%
 declare
-[Projet]={Module.link ["/home/alexandre/Bureau/info2_projet/Projet2016.ozf"]}
+[Projet]={Module.link ["/home/gilles/SugarPicker/Projet2016.ozf"]}
 
 %====CODE====%
 local
@@ -22,7 +22,7 @@ local
 		   )
    
 in
-   Map = map(ru:[scale(rx:10.0 ry:10.0 1:translate(dx:250.0 dy:250.0 1:primitive(kind:road)))] pu:nil) %% TODO change the map here
+   Map = map(ru:[rotate(angle:0.07 1:scale(rx:100.0 ry:100.0 1:translate(dx:250.0 dy:250.0 1:primitive(kind:road))))] pu:nil) %% TODO change the map here
 
    %%prend une Map en parametre et retourne une liste de fonction annonymes qui renvoie chacune un element a afficher.
    fun{MyFunction Map }
@@ -56,10 +56,10 @@ in
 	 % /!\ Les valeurs Rx Ry sont considerees comme 0.0 si on utilise scale
 	 fun{Change Ru Rx Ry Dx Dy Theta}  
 	       case Ru of nil then nil
-	       [] primitive(kind:K) then {Create Ru Rx Ry Dx Dy Theta}
-	       [] scale(rx:RX ry:RY 1:RU) then {Change RU RX RY Dx Dy Theta}
-	       [] translate(dx:DX dy:DY 1:RU) then {Change RU Rx Ry DX DY Theta}
-	       [] rotate(angle: X 1:RU) then  {Change RU Rx Ry Dx Dy X}
+	       [] primitive(kind:K) then {Create Ru Rx Ry Dx Dy Theta}  % Cree un realitem avec les valeurs des opérations parcourues
+	       [] scale(rx:RX ry:RY 1:RU) then {Change RU RX RY Dx Dy Theta}      % Avance dans RU et save les valeurs du save
+	       [] translate(dx:DX dy:DY 1:RU) then {Change RU Rx Ry DX DY Theta}  % Avance dans RU et save les valeurs du translate
+	       [] rotate(angle:X 1:RU) then  {Change RU Rx Ry Dx Dy X}            % Avance dans RU et save les valeurs du rotate
 	       end
 	 end
 	 %Cree un RUI a l'aide d'une primitive et des coefficient en X et Y.
