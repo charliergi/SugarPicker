@@ -22,7 +22,7 @@ local
 		   )
    
 in
-   Map = map(ru:[scale(rx:3.0 ry:3.0 1:translate(dx:250.0 dy:250.0 1:primitive(kind:building)))] pu:nil) %% TODO change the map here
+   Map = map(ru:[scale(rx:10.0 ry:10.0 1:translate(dx:250.0 dy:250.0 1:primitive(kind:road)))] pu:nil) %% TODO change the map here
 
    %%prend une Map en parametre et retourne une liste de fonction annonymes qui renvoie chacune un element a afficher.
    fun{MyFunction Map }
@@ -41,14 +41,14 @@ in
 	 %Parcourt la liste des RU de la map pour renvoyer une liste de fonction annonymes
 	 fun{Search RU Acc}
 	    case RU of nil then Acc
-	    [] X|Y then {Search Y {BuildFunc}|Acc}
+	    [] X|Y then {Search Y {BuildFunc X}|Acc}
 	    end
 	 end
       
 	 %Construit une fonction a l'aide d'un record RU en paramètre
 	 fun{BuildFunc R}
 	    fun{$ Time}
-	       {Change R 0.0 0.0 0.0 0.0}
+	       {Change R 0.0 0.0 0.0 0.0 0.0}
 	    end
 	 end
 	 % Stocke les donnees des RU pour creer un RUI
@@ -60,6 +60,7 @@ in
 	       [] scale(rx:RX ry:RY 1:RU) then {Change RU RX RY Dx Dy Theta}
 	       [] translate(dx:DX dy:DY 1:RU) then {Change RU Rx Ry DX DY Theta}
 	       [] rotate(angle: X 1:RU) then  {Change RU Rx Ry Dx Dy X}
+	       end
 	 end
 	 %Cree un RUI a l'aide d'une primitive et des coefficient en X et Y.
 	 %%TODO changer la definition des points
@@ -69,27 +70,27 @@ in
 	    [] primitive(kind:K) then
 	       if K == road then
 		  realitem(kind:road
-			   p1:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Cos Theta})
-			   p2:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Cos Theta})
+			   p1:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Sin Theta})
+			   p2:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Sin Theta})
 			   )
 	       elseif K == building then
 		  realitem(kind:building
-			   p1:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Cos Theta})
-			   p2:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Cos Theta})
-			   p3:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Cos Theta})
-			   p4:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Cos Theta})
+			   p1:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Sin Theta})
+			   p2:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Sin Theta})
+			   p3:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Sin Theta})
+			   p4:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Sin Theta})
 			   )
 	       else
 		  realitem(kind:water
-			   p1:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Cos Theta})
-			   p2:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Cos Theta})
-			   p3:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Cos Theta})
-			   p4:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Cos Theta})
+			   p1:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Sin Theta})
+			   p2:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Sin Theta})
+			   p3:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Sin Theta})
+			   p4:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Sin Theta})
 			   )
 	       end
 	    end
 	 end
-	 {Separate Map}
+	 {Separate Map _ _}
       end
    end
    
