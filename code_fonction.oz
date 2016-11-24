@@ -23,11 +23,12 @@ local
 		   )
    
 in
-   Map = map(ru:[rotate(angle:0.07 1:scale(rx:100.0 ry:100.0 1:translate(dx:250.0 dy:250.0 1:primitive(kind:road)))) rotate(angle:0.07 1:scale(rx:100.0 ry:100.0 1:translate(dx:200.0 dy:200.0 1:primitive(kind:road)))) ] pu:[translate(dx:time dy:time 1:primitive(kind:arena))]) %% TODO change the map here
+   /*Map = map(ru:[rotate(angle:0.07 1:scale(rx:100.0 ry:100.0 1:translate(dx:250.0 dy:250.0 1:primitive(kind:road)))) rotate(angle:0.07 1:scale(rx:100.0 ry:100.0 1:translate(dx:200.0 dy:200.0 1:primitive(kind:road)))) ] pu:[translate(dx:time dy:time 1:primitive(kind:arena))])*/ %% TODO change the map here
+   Map = map(ru:nil pu:[translate(dx:mult(1:100.0 2:mult(1:2.0 2:cos(1:time))) dy:200.0 1:primitive(kind:pokemon)) translate(dx:mult(1:100.0 2:mult(1:2.0 2:cos(1:time))) dy:200.0 1:primitive(kind:arena)) ])
    
    %%prend une Map en parametre et retourne une liste de fonction annonymes qui renvoie chacune un element a afficher.
    fun{MyFunction Map }
-      local Search Change Create BuildFunc Separate SearchForPu ChangeForPu BuildFuncForPu in
+      local Search Change Create Calculate BuildFunc Separate SearchForPu ChangeForPu BuildFuncForPu in
 	 %prend une map en paramètre et cree une liste de fonction annonyme suivant ru et pu dans map(ru:XX pu:XX)
 	 
 	 fun{Separate Map Acc1 Acc2}
@@ -62,7 +63,7 @@ in
 	 
 	 fun{BuildFuncForPu R}
 	    fun{$ Time}
-	       {ChangeForPu R Time false}
+	       {ChangeForPu R Time _ _ false}
 	    end
 	 end
 	 
@@ -72,27 +73,32 @@ in
 	 
 	 fun{Change Ru Rx Ry Dx Dy Theta}  
 	    case Ru of nil then nil
-	    [] primitive(kind:K) then {Create Ru Rx Ry Dx Dy Theta Time}        % Cree un realitem avec les valeurs des opérations parcourues
+	    [] primitive(kind:K) then {Create Ru Rx Ry Dx Dy Theta 0.0 0.0}        % Cree un realitem avec les valeurs des opérations parcourues
 	    [] scale(rx:RX ry:RY 1:RU) then {Change RU Rx+RX Ry+RY Dx Dy Theta}   % Avance dans RU et save les valeurs du save
 	    [] translate(dx:DX dy:DY 1:RU) then {Change RU Rx Ry Dx*DX Dy*DY Theta} % Avance dans RU et save les valeurs du translate
 	    [] rotate(angle:X 1:RU) then  {Change RU Rx Ry Dx Dy Theta*X}        % Avance dans RU et save les valeurs du rotate
 	    end
 	 end
-	 fun{ChangeForPu Pu Time Check}
-	    case Pu of nil then nil
-	    [] primitive(kind:K) then
-	       {Browse Time}
-	       if Check == true then {Create Pu 0.0 0.0 0.0 0.0 0.0 Time}
-	       else
-	       {Create Pu 0.0 0.0 0.0 0.0 0.0 0.0}
+	 
+	 %Check est un boolean qui indique si le pu a subit une translation. Si oui, il va appliquer le Time dans les coordonees du pokeitem
+	 fun{ChangeForPu Pu Time Formula1 Formula2 Check}
+	    local Calculated1 Calculated2 in
+	       case Pu of nil then nil
+	       [] primitive(kind:K) then
+		  if Check == true then {Create Pu 0.0 0.0 0.0 0.0 0.0 Formula1 Formula2}
+		  else
+		     {Create Pu 0.0 0.0 0.0 0.0 0.0 0.0 0.0}
+		  end
+	       [] translate(dx:Data1 dy:Data2 1:PU) then
+		  Calculated1 = {Calculate Data1 Time}
+		  Calculated2 = {Calculate Data2 Time}
+		  {ChangeForPu PU Time Calculated1 Calculated2 true}
 	       end
-	    [] translate(dx:Timer dy:Timer2 1:PU) then {ChangeForPu PU Time true}
 	    end
 	 end
-
+	 
          %Calcule la Formule (Data) passée en paramètre
-	 declare
-	 fun{Calculate Data Time}
+	 fun{Calculate Data Time }
 	    case Data of time then Time
 	    [] plus(1:X 2:Y) then
 	       {Calculate X Time} + {Calculate Y Time}
@@ -114,7 +120,7 @@ in
 	       else
 		  {Float.cos {Calculate X Time}}  
 	       end
-	   [] tan(1:X) then
+	    [] tan(1:X) then
 	       case X of time then
 		  {Float.tan Time}
 	       else
@@ -126,41 +132,41 @@ in
 	 end
 	 %{Browse {Calculate plus(1:6.0 2:'div'(1:0.84 2:sin(1:time))) 18.0}}
 	 %{Browse {Calculate sin(1:plus(1:2.0 2:time)) 1.0}}
-	 {Browse {Calculate plus(1:cos(1:tan(1:0.00000001)) 2:mult(1:1000.0 2:mult(1:10000.0 2:mult(1:10000000.0 2:100000000.0)))) 1.0}}  
-	       
+	 %{Browse {Calculate plus(1:cos(1:tan(1:0.00000001)) 2:mult(1:1000.0 2:mult(1:10000.0 2:mult(1:10000000.0 2:100000000.0)))) 1.0}}  
+	 
 	 
 	 %Cree un RUI a l'aide d'une primitive et des coefficient en X et Y.
 	 %%TODO changer la definition des points
 	 
-	 fun{Create Ru Rx Ry Dx Dy Theta Time}
+	 fun{Create Ru Rx Ry Dx Dy Theta Formula1 Formula2}
 	    
 	    case Ru of nil then nil
 	    [] primitive(kind:K) then
 	       if K == road then
 		  realitem(kind:road
 			   p1:pt(x:((Rx*(0.0*{Cos Theta})+Dx))+(Ry*(0.0*{Sin Theta})) y:((Ry*(0.0*{Cos Theta})+Dy))-(Rx*(0.0*{Sin Theta})))
- 			   p2:pt(x:((Rx*(1.0*{Cos Theta})+Dx))+(Ry*(0.0*{Sin Theta})) y:((Ry*(0.0*{Cos Theta})+Dy))-(Rx*(1.0*{Sin Theta})))
+			   p2:pt(x:((Rx*(1.0*{Cos Theta})+Dx))+(Ry*(0.0*{Sin Theta})) y:((Ry*(0.0*{Cos Theta})+Dy))-(Rx*(1.0*{Sin Theta})))
 			  )
 	       elseif K == building then
 		  realitem(kind:building
 			   p1:pt(x:((Rx*(0.0*{Cos Theta})+Dx))+(Ry*(0.0*{Sin Theta})) y:((Ry*(0.0*{Cos Theta})+Dy))-(Rx*(0.0*{Sin Theta})))
- 			   p2:pt(x:((Rx*(1.0*{Cos Theta})+Dx))+(Ry*(0.0*{Sin Theta})) y:((Ry*(0.0*{Cos Theta})+Dy))-(Rx*(1.0*{Sin Theta})))
- 			   p3:pt(x:((Rx*(1.0*{Cos Theta})+Dx))+(Ry*(1.0*{Sin Theta})) y:((Ry*(1.0*{Cos Theta})+Dy))-(Rx*(1.0*{Sin Theta})))
- 			   p4:pt(x:((Rx*(0.0*{Cos Theta})+Dx))+(Ry*(1.0*{Sin Theta})) y:((Ry*(1.0*{Cos Theta})+Dy))-(Rx*(0.0*{Sin Theta})))
+			   p2:pt(x:((Rx*(1.0*{Cos Theta})+Dx))+(Ry*(0.0*{Sin Theta})) y:((Ry*(0.0*{Cos Theta})+Dy))-(Rx*(1.0*{Sin Theta})))
+			   p3:pt(x:((Rx*(1.0*{Cos Theta})+Dx))+(Ry*(1.0*{Sin Theta})) y:((Ry*(1.0*{Cos Theta})+Dy))-(Rx*(1.0*{Sin Theta})))
+			   p4:pt(x:((Rx*(0.0*{Cos Theta})+Dx))+(Ry*(1.0*{Sin Theta})) y:((Ry*(1.0*{Cos Theta})+Dy))-(Rx*(0.0*{Sin Theta})))
 			  )
 	       elseif K== water then
 		  realitem(kind:water
 			   p1:pt(x:((Rx*(0.0*{Cos Theta})+Dx))+(Ry*(0.0*{Sin Theta})) y:((Ry*(0.0*{Cos Theta})+Dy))-(Rx*(0.0*{Sin Theta})))
 			   p2:pt(x:((Rx*(1.0*{Cos Theta})+Dx))+(Ry*(0.0*{Sin Theta})) y:((Ry*(0.0*{Cos Theta})+Dy))-(Rx*(1.0*{Sin Theta})))
- 			   p3:pt(x:((Rx*(1.0*{Cos Theta})+Dx))+(Ry*(1.0*{Sin Theta})) y:((Ry*(1.0*{Cos Theta})+Dy))-(Rx*(1.0*{Sin Theta})))
+			   p3:pt(x:((Rx*(1.0*{Cos Theta})+Dx))+(Ry*(1.0*{Sin Theta})) y:((Ry*(1.0*{Cos Theta})+Dy))-(Rx*(1.0*{Sin Theta})))
 			   p4:pt(x:((Rx*(0.0*{Cos Theta})+Dx))+(Ry*(1.0*{Sin Theta})) y:((Ry*(1.0*{Cos Theta})+Dy))-(Rx*(0.0*{Sin Theta})))
 			  )
 	       elseif K==pokemon then
-		  pokeitem(kind:pokemon position:pt(x:150.0+Time y:150.0+Time))
+		  pokeitem(kind:pokemon position:pt(x:150.0+Formula1 y:150.0+Formula2))
 	       elseif K==pokestop then
-		  pokeitem(kind:pokestop position:pt(x:250.0+Time y:250.0+Time))
+		  pokeitem(kind:pokestop position:pt(x:250.0+Formula1 y:250.0+Formula2))
 	       elseif K==arena then
-		  pokeitem(kind:arena position:pt(x:350.0+Time y:350.0+Time))
+		  pokeitem(kind:arena position:pt(x:350.0+Formula1 y:350.0+Formula2))
 	       else
 		  yolo	  
 	       end
@@ -169,9 +175,9 @@ in
 	 {Separate Map _ _}
       end
    end
-  
    
    
+	 
    
    fun{CheckMap Map}
       false %% TODO complete here the function for the checking of the maps
