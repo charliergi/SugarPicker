@@ -24,7 +24,7 @@ local
    
 in
    /*Map = map(ru:[rotate(angle:0.07 1:scale(rx:100.0 ry:100.0 1:translate(dx:250.0 dy:250.0 1:primitive(kind:road)))) rotate(angle:0.07 1:scale(rx:100.0 ry:100.0 1:translate(dx:200.0 dy:200.0 1:primitive(kind:road)))) ] pu:[translate(dx:time dy:time 1:primitive(kind:arena))])*/ %% TODO change the map here
-   Map = map(ru:nil pu:[translate(dx:mult(1:100.0 2:mult(1:2.0 2:cos(1:time))) dy:200.0 1:primitive(kind:pokemon)) translate(dx:mult(1:100.0 2:mult(1:2.0 2:cos(1:time))) dy:200.0 1:primitive(kind:arena)) ])
+   Map = map(ru:nil pu:[translate(dx:mult(1:100.0 2:time) dy:200.0 1:primitive(kind:pokemon))])
    
    %%prend une Map en parametre et retourne une liste de fonction annonymes qui renvoie chacune un element a afficher.
    fun{MyFunction Map }
@@ -98,38 +98,98 @@ in
 	 end
 	 
          %Calcule la Formule (Data) passée en paramètre
-	 fun{Calculate Data Time }
+	 fun{Calculate Data Time}
 	    case Data of time then Time
-	    [] plus(1:X 2:Y) then
+	    [] plus(X Y) then
 	       {Calculate X Time} + {Calculate Y Time}
-	    [] minus(1:X 2:Y) then
+	    [] minus(X Y) then
 	       {Calculate X Time} - {Calculate Y Time}
-	    [] mult(1:X 2:Y) then
+	    [] mult(X Y) then
 	       {Calculate X Time} * {Calculate Y Time}
-	    []'div'(1:X 2:Y) then
+	    []'div'(X Y) then
 	       {Calculate X Time} / {Calculate Y Time}
-	    [] sin(1:X) then
+	    [] sin(X) then
 	       case X of time then
 		  {Float.sin Time}
 	       else
 		  {Float.sin {Calculate X Time}}  
 	       end
-	    [] cos(1:X) then
+	    [] cos(X) then
 	       case X of time then
 		  {Float.cos Time}
 	       else
 		  {Float.cos {Calculate X Time}}  
 	       end
-	    [] tan(1:X) then
+	    [] tan(X) then
 	       case X of time then
 		  {Float.tan Time}
 	       else
 		  {Float.tan {Calculate X Time}}  
 	       end
+	    [] exp(X) then
+	       case X of time then 
+		  {Float.exp Time}
+	       else
+		  {Float.exp {Calculate X Time}}
+	       end
+	    [] log(X) then
+	       case X of time then 
+		  {Float.log Time}
+	       else
+		  {Float.log {Calculate X Time}}
+	       end
+	    [] neg(X) then
+	       ~{Calculate X Time}
+	    [] ite(X Y Z) then
+	       if {Calculate X Time} == 0.0 then
+		  {Calculate Z Time}
+	       else
+		  {Calculate Y Time}
+	       end
+	    [] eq(X Y) then
+	       if {Calculate X Time} == {Calculate Y Time} then
+		  1.0
+	       else
+		  0.0
+	       end
+	    [] ne(X Y) then
+	       if {Calculate X Time} == {Calculate Y Time} then
+		  0.0
+	       else
+		  1.0
+	       end
+	    [] lt(X Y) then
+	       if {Calculate X Time} < {Calculate Y Time} then
+		  1.0
+	       else
+		  0.0
+	       end
+	    [] le(X Y) then
+	       if {Calculate X Time} =< {Calculate Y Time} then
+		  1.0
+	       else
+		  0.0
+	       end
+	     [] gt(X Y) then
+	       if {Calculate X Time} > {Calculate Y Time} then
+		  1.0
+	       else
+		  0.0
+	       end
+	     [] ge(X Y) then
+	       if {Calculate X Time} >= {Calculate Y Time} then
+		  1.0
+	       else
+		  0.0
+	       end 
+	       
 	    else
 	       Data
 	    end
 	 end
+	 {Browse {Calculate mult(plus(log(42000.0) exp(666.0)) 27000000.0) 10.0}}
+	 {Browse {Calculate minus(72.0 mult(42.0 log(23.0))) 10.0}}
+	 {Browse {Calculate ite(minus(10.0 20.0) plus(10.0 20.0) minus(10.0 30.0)) 10.0}}
 	 %{Browse {Calculate plus(1:6.0 2:'div'(1:0.84 2:sin(1:time))) 18.0}}
 	 %{Browse {Calculate sin(1:plus(1:2.0 2:time)) 1.0}}
 	 %{Browse {Calculate plus(1:cos(1:tan(1:0.00000001)) 2:mult(1:1000.0 2:mult(1:10000.0 2:mult(1:10000000.0 2:100000000.0)))) 1.0}}  
@@ -162,7 +222,7 @@ in
 			   p4:pt(x:((Rx*(0.0*{Cos Theta})+Dx))+(Ry*(1.0*{Sin Theta})) y:((Ry*(1.0*{Cos Theta})+Dy))-(Rx*(0.0*{Sin Theta})))
 			  )
 	       elseif K==pokemon then
-		  pokeitem(kind:pokemon position:pt(x:150.0+Formula1 y:150.0+Formula2))
+		  pokeitem(kind:pokemon position:pt(x:0.0+Formula1 y:0.0+Formula2))
 	       elseif K==pokestop then
 		  pokeitem(kind:pokestop position:pt(x:250.0+Formula1 y:250.0+Formula2))
 	       elseif K==arena then
