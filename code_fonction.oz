@@ -42,7 +42,7 @@ in
 	 %Parcourt la liste des RU de la map pour renvoyer une liste de fonction annonymes
 	 fun{Search RU Acc}
 	    case RU of nil then Acc
-	    [] X|Y then {Search Y {BuildFunc X}|Acc}
+	    [] H|T then {Search T {BuildFunc H}|Acc}
 	    end
 	 end
 	 
@@ -56,7 +56,7 @@ in
 	 %Construit une fonction a l'aide d'un record RU en paramètre
 	 fun{BuildFunc R}
 	    fun{$ Time}
-	       {Change R 0.0 0.0 0.0 0.0 0.0}
+	       {Change R 0.0 0.0 1.0 1.0 0.0}
 	    end
 	 end
 	 
@@ -73,9 +73,9 @@ in
 	 fun{Change Ru Rx Ry Dx Dy Theta}  
 	    case Ru of nil then nil
 	    [] primitive(kind:K) then {Create Ru Rx Ry Dx Dy Theta Time}        % Cree un realitem avec les valeurs des opérations parcourues
-	    [] scale(rx:RX ry:RY 1:RU) then {Change RU RX RY Dx Dy Theta}   % Avance dans RU et save les valeurs du save
-	    [] translate(dx:DX dy:DY 1:RU) then {Change RU Rx Ry DX DY Theta} % Avance dans RU et save les valeurs du translate
-	    [] rotate(angle:X 1:RU) then  {Change RU Rx Ry Dx Dy X}        % Avance dans RU et save les valeurs du rotate
+	    [] scale(rx:RX ry:RY 1:RU) then {Change RU Rx+RX Ry+RY Dx Dy Theta}   % Avance dans RU et save les valeurs du save
+	    [] translate(dx:DX dy:DY 1:RU) then {Change RU Rx Ry Dx*DX Dy*DY Theta} % Avance dans RU et save les valeurs du translate
+	    [] rotate(angle:X 1:RU) then  {Change RU Rx Ry Dx Dy Theta*X}        % Avance dans RU et save les valeurs du rotate
 	    end
 	 end
 	 fun{ChangeForPu Pu Time Check}
@@ -138,22 +138,22 @@ in
 	    [] primitive(kind:K) then
 	       if K == road then
 		  realitem(kind:road
-			   p1:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Sin Theta})
-			   p2:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Sin Theta})
+			   p1:pt(x:((Rx*(0.0*{Cos Theta})+Dx))+(Ry*(0.0*{Sin Theta})) y:((Ry*(0.0*{Cos Theta})+Dy))-(Rx*(0.0*{Sin Theta})))
+ 			   p2:pt(x:((Rx*(1.0*{Cos Theta})+Dx))+(Ry*(0.0*{Sin Theta})) y:((Ry*(0.0*{Cos Theta})+Dy))-(Rx*(1.0*{Sin Theta})))
 			  )
 	       elseif K == building then
 		  realitem(kind:building
-			   p1:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Sin Theta})
-			   p2:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Sin Theta})
-			   p3:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Sin Theta})
-			   p4:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Sin Theta})
+			   p1:pt(x:((Rx*(0.0*{Cos Theta})+Dx))+(Ry*(0.0*{Sin Theta})) y:((Ry*(0.0*{Cos Theta})+Dy))-(Rx*(0.0*{Sin Theta})))
+ 			   p2:pt(x:((Rx*(1.0*{Cos Theta})+Dx))+(Ry*(0.0*{Sin Theta})) y:((Ry*(0.0*{Cos Theta})+Dy))-(Rx*(1.0*{Sin Theta})))
+ 			   p3:pt(x:((Rx*(1.0*{Cos Theta})+Dx))+(Ry*(1.0*{Sin Theta})) y:((Ry*(1.0*{Cos Theta})+Dy))-(Rx*(1.0*{Sin Theta})))
+ 			   p4:pt(x:((Rx*(0.0*{Cos Theta})+Dx))+(Ry*(1.0*{Sin Theta})) y:((Ry*(1.0*{Cos Theta})+Dy))-(Rx*(0.0*{Sin Theta})))
 			  )
 	       elseif K== water then
 		  realitem(kind:water
-			   p1:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Sin Theta})
-			   p2:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*0.0)+Dy)*{Sin Theta} y:((Ry*0.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Sin Theta})
-			   p3:pt(x:((Rx*1.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*1.0)+Dx)*{Sin Theta})
-			   p4:pt(x:((Rx*0.0)+Dx)*{Cos Theta}+((Ry*1.0)+Dy)*{Sin Theta} y:((Ry*1.0)+Dy)*{Cos Theta}-((Rx*0.0)+Dx)*{Sin Theta})
+			   p1:pt(x:((Rx*(0.0*{Cos Theta})+Dx))+(Ry*(0.0*{Sin Theta})) y:((Ry*(0.0*{Cos Theta})+Dy))-(Rx*(0.0*{Sin Theta})))
+			   p2:pt(x:((Rx*(1.0*{Cos Theta})+Dx))+(Ry*(0.0*{Sin Theta})) y:((Ry*(0.0*{Cos Theta})+Dy))-(Rx*(1.0*{Sin Theta})))
+ 			   p3:pt(x:((Rx*(1.0*{Cos Theta})+Dx))+(Ry*(1.0*{Sin Theta})) y:((Ry*(1.0*{Cos Theta})+Dy))-(Rx*(1.0*{Sin Theta})))
+			   p4:pt(x:((Rx*(0.0*{Cos Theta})+Dx))+(Ry*(1.0*{Sin Theta})) y:((Ry*(1.0*{Cos Theta})+Dy))-(Rx*(0.0*{Sin Theta})))
 			  )
 	       elseif K==pokemon then
 		  pokeitem(kind:pokemon position:pt(x:150.0+Time y:150.0+Time))
