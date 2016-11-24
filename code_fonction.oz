@@ -91,8 +91,9 @@ in
 	 end
 
          %Calcule la Formule (Data) passée en paramètre
+	 declare
 	 fun{Calculate Data Time}
-	    case Data of nil then 0
+	    case Data of time then Time
 	    [] plus(1:X 2:Y) then
 	       {Calculate X Time} + {Calculate Y Time}
 	    [] minus(1:X 2:Y) then
@@ -102,17 +103,30 @@ in
 	    []'div'(1:X 2:Y) then
 	       {Calculate X Time} / {Calculate Y Time}
 	    [] sin(1:X) then
-	       {Calculate {Float.sin X} Time}
+	       case X of time then
+		  {Float.sin Time}
+	       else
+		  {Float.sin {Calculate X Time}}  
+	       end
 	    [] cos(1:X) then
-	       {Calculate {Float.cos X} Time}
-	    [] tan(1:X) then
-	       {Calculate {Float.tan X} Time}
+	       case X of time then
+		  {Float.cos Time}
+	       else
+		  {Float.cos {Calculate X Time}}  
+	       end
+	   [] tan(1:X) then
+	       case X of time then
+		  {Float.tan Time}
+	       else
+		  {Float.tan {Calculate X Time}}  
+	       end
 	    else
 	       Data
 	    end
 	 end
-	 
-	     
+	 %{Browse {Calculate plus(1:6.0 2:'div'(1:0.84 2:sin(1:time))) 18.0}}
+	 %{Browse {Calculate sin(1:plus(1:2.0 2:time)) 1.0}}
+	 {Browse {Calculate plus(1:cos(1:tan(1:0.00000001)) 2:mult(1:1000.0 2:mult(1:10000.0 2:mult(1:10000000.0 2:100000000.0)))) 1.0}}  
 	       
 	 
 	 %Cree un RUI a l'aide d'une primitive et des coefficient en X et Y.
