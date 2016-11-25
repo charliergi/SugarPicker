@@ -57,6 +57,10 @@ fun{CheckMap Map}
 	       if {CheckFormule Dy} andthen {CheckFormule Dx} then {CheckPu Pu}
 	       else false
 	       end
+	    [] spawn(tmin:X tmax:Y 1:Pu) then
+	       if {Int.is X} andthen {Int.is Y} then true
+	       else false
+	       end
 	    else false
 	    end
 	 else false
@@ -94,6 +98,47 @@ fun{CheckMap Map}
 	       if {CheckFormule X} then true
 	       else false
 	       end
+	    [] exp(X) then
+	       if {CheckFormule X} then true
+	       else false
+	       end
+	    [] log(X) then
+	       if {CheckFormule X} then true
+	       else false
+	       end
+	    [] neg(X) then
+	       if {CheckFormule X} then true
+	       else false
+	       end
+	    [] ite(X Y Z) then
+	       if {CheckFormule X} andthen {CheckFormule Y} andthen {CheckFormule Z} then true
+	       else false
+	       end
+	    [] eq(X Y) then
+	       if {CheckFormule X} andthen {CheckFormule Y} then true
+	       else false
+	       end
+	    [] ne(X Y) then
+	       if {CheckFormule X} andthen {CheckFormule Y} then true
+	       else false
+	       end
+	    [] lt(X Y) then
+	       if {CheckFormule X} andthen {CheckFormule Y} then true
+	       else false
+	       end
+	    [] le(X Y) then
+	       if {CheckFormule X} andthen {CheckFormule Y} then true
+	       else false
+	       end
+	    [] gt(X Y) then
+	       if {CheckFormule X} andthen {CheckFormule Y} then true
+	       else false
+	       end
+	    [] ge(X Y) then
+	       if {CheckFormule X} andthen {CheckFormule Y} then true
+	       else false
+	       end
+	    else false
 	    end
 	 end
       end
