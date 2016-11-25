@@ -8,9 +8,9 @@ fun{Determine Ru Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4}
       case H of primitive(kind:K) then
 	 {Create Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 K}|{Determine T Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4}
       [] translate(dx:X dy:Y 1:Ru) then
-	 {Determine Ru Dx1+X Dy1+Y Dx2+X Dy2+Y Dx3+X Dy3+Y Dx4+X Dy4+Y}|{Determine Y Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4}
+	 {Determine Ru Dx1+X Dy1+Y Dx2+X Dy2+Y Dx3+X Dy3+Y Dx4+X Dy4+Y}|{Determine T Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4}
       [] scale(rx:X ry:Y 1:Ru) then
-	 {Determine Ru Dx1*X Dy1*Y Dx2*X Dy2*Y Dx3*X Dy3*Y Dx4*X Dy4*Y}|{Determine Y Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4}
+	 {Determine Ru Dx1*X Dy1*Y Dx2*X Dy2*Y Dx3*X Dy3*Y Dx4*X Dy4*Y}|{Determine T Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4}
       [] rotate(angle:Theta 1:Ru) then
 	 {Determine
 	  Ru
@@ -18,16 +18,15 @@ fun{Determine Ru Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4}
 	  (Dx2*{Float.cos Theta}+Dy2*{Float.sin Theta}) (Dy2*{Float.cos Theta}-Dx2*{Float.sin Theta})
 	  (Dx3*{Float.cos Theta}+Dy3*{Float.sin Theta}) (Dy3*{Float.cos Theta}-Dx3*{Float.sin Theta})
 	  (Dx4*{Float.cos Theta}+Dy4*{Float.sin Theta}) (Dy4*{Float.cos Theta}-Dx4*{Float.sin Theta})
-	 }
+	 }|{Determine T Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4}
       else nil
       end
    else nil
    end
 end
 
-{Browse {Determine [primitive(kind:road) translate(dx:30.0 dy:30.0 1:[primitive(kind:water)]) translate(dx:10.0 dy:10.0 1:[translate(dx:10.0 dy:10.0 1:[primitive(kind:water)])]) primitive(kind:water) primitive(kind:road)] 0.0 0.0 0.0 1.0 1.0 1.0 1.0 0.0}}
+
 % Cree le record avec ses coordonnees selon son type (kind) -- OK
-declare
 fun{Create Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 K}
    case K of road then realitem(kind:road
 				p1:pt(x:Dx1 y:Dy1)
@@ -77,7 +76,7 @@ end
 
 
 
-{Browse  {Separate map(ru: [translate(dx:10.0 dy:10.0 1:[scale(rx:10.0 ry:10.0 1:[primitive(kind:road)])])] pu:nil)}}
+{Browse {Determine [primitive(kind:road) translate(dx:30.0 dy:30.0 1:[primitive(kind:water)]) translate(dx:10.0 dy:10.0 1:[translate(dx:10.0 dy:10.0 1:[primitive(kind:water)])]) primitive(kind:water) primitive(kind:road)] 0.0 0.0 0.0 1.0 1.0 1.0 1.0 0.0}}
 
 
 
