@@ -1,7 +1,7 @@
 %====INFORMATION====%
 % LFSAB1402 Projet 2016
-% Nomas : NOMA1-NOMA2
-% Noms : (Nom1,Prenom1)-(Nom2,Prenom2)
+% Nomas : 08891500-NOMA2
+% Noms : (Charlier,Gilles)-(Fiset,Alexandre)
 %====MODULELINK====%
 declare
 [Projet]={Module.link ["/home/gilles/SugarPicker/Projet2016.ozf"]}
@@ -15,7 +15,7 @@ local
    Extensions = opt(withExtendedFormula:true
 		    withIfThenElse:true
 		    withComparison:true
-		    withTimeWindow:false
+		    withTimeWindow:true
 		    withCheckMapEasy:false
 		    withCheckMapComplete:false
 		   )
