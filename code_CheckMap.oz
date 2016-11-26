@@ -69,7 +69,7 @@ fun{CheckMap Map}
       fun{CheckFormule F}
 	 if {Float.is F} then true
 	 else
-	    case time of F then true
+	    case F of time then true
 	    [] plus(X Y) then
 	       if {CheckFormule X} andthen {CheckFormule Y} then true
 	       else false
@@ -151,6 +151,6 @@ fun{CheckMap Map}
       end	 
    end
 end
-Map = map(ru:[rotate(angle:1.6 1:[scale(rx:cos(sin(10.0)) ry:100.0 1:[translate(dx:250.0 dy:250.0 1:[primitive(kind:road) primitive(kind:road)])])])] pu:[translate(dx:time dy:cos(sin(10.0)) 1:[primitive(kind:pokemon) primitive(kind:pokestop)])])
+Map =  map(ru:[translate(dx:ge(time 10.0) dy:10.0 1:[scale(rx:10.0 ry:10.0 1:[primitive(kind:road) translate(dx:10.0 dy:10.0 1:[translate(dx:10.0 dy:10.0 1:[primitive(kind:water)]) primitive(kind:building)])])])] pu:[translate(dx:mult(10.0 time) dy:100.0 1:[primitive(kind:pokemon) primitive(kind:arena) primitive(kind:pokestop)])])
 
 {Browse {CheckMap Map}}
