@@ -1,6 +1,6 @@
 %====INFORMATION====%
 % LFSAB1402 Projet 2016
-% Nomas : 08891500-NOMA2
+% Nomas : 08891500-54931500
 % Noms : (Charlier,Gilles)-(Fiset,Alexandre)
 %====MODULELINK====%
 declare
