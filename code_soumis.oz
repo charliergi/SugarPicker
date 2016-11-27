@@ -146,12 +146,15 @@ in
 	 
 % Reorganise lea liste passée en paramètre pour avoir une simple liste de record -- OK
 	 fun{Reorganise L}
-	    case L of H|T then
+	    case L of nil then nil
+	    [] H|T then
 	       case H of H1|T1 then
-		  {Append {Reorganise H} T}
-	       else H|{Reorganise T}
+		  {Append  {Append {Reorganise H1} {Reorganise T1}} {Reorganise T}}
+	       else
+		  {Append [H] {Reorganise T}}
 	       end
-	    else L
+	    else
+	       [L]
 	    end
 	 end
 	 {Separate Map}
