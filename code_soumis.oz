@@ -4,8 +4,8 @@
 % Noms : (Charlier,Gilles)-(Fiset,Alexandre)
 %====MODULELINK====%
 declare
-[Projet]={Module.link ["/home/gilles/SugarPicker/Projet2016.ozf"]}
-{Property.put 'MyDir' '/home/gilles/SugarPicker/'}
+[Projet]={Module.link ["/home/alexandre/Bureau/info2_projet/Projet2016.ozf"]}
+{Property.put 'MyDir' '/home/alexandre/Bureau/info2_projet/'}
 %====CODE====%
 local
    MaxTime = 10 % nombre de frame à l'animation
@@ -20,51 +20,74 @@ local
 		    withCheckMapComplete:false
 		   )
 in
-   Map = map(ru:[scale(rx:100.0 ry:100.0 1:[translate(dx:200.0 dy:200.0 1:[primitive(kind:road)])])] pu:[translate(dx:200.0 dy:mult(time 50.0) 1:[spawn(tmin:5 tmax:6 1:[spawn(tmin:3 tmax:6 1:[primitive(kind:pokemon)])])])]) %% TODO change the map here
+   Map =map(ru:[translate(dx:100.0 dy:100.0 1:[scale(rx:10.0 ry:10.0 1:[primitive(kind:road)])])] pu:[translate(dx:time dy:250.0 1:[primitive(kind:pokemon)])])
+  % map(ru:[translate(dx:plus(200.0 50.0) dy:mult(50.0 mult(5.0 cos(0.0))) 1:[scale(rx:100.0 ry:100.0 1:[primitive(kind:road)])]) scale(rx:200.0 ry:200.0 1:[primitive(kind:road) primitive(kind:building)])] pu:nil) %% TODO change the map here
 % Prends une liste de Ru en paramètre
 % Si le record traité est une primitive, alors le record est traité avec ses opérations précédentes dans le bon ordre, et est joint à la suite des autres records.
 % Sinon, selon le record traité, effectue des opérations correspondantes sur les coordonnées de la future primitive traitée. -- OK
    
    fun{MyFunction Map}
-      local Determine Create Separate Reorganise BuildFunc Calculate in 
+      local Determine Create Separate Reorganise BuildFunc Calculate CreateOpp in 
 	 % Lance la fonction Determine sur la liste Ru et Pu de la map. -- OK
 	 fun{Separate Map}
-	    case Map of nil then nil
-	    [] map(ru:Ru pu:Pu) then
-	       local I1 I2 in
-		  I1={Determine Ru 0.0 0.0 0.0 1.0 1.0 1.0 1.0 0.0 0 MaxTime}
-		  I2={Determine Pu 0.0 0.0 0.0 1.0 1.0 1.0 1.0 0.0 0 MaxTime}
-		  {Append {Reorganise I1} {Reorganise I2}}
-	       end
-	    end
+   case Map of nil then nil
+   [] map(ru:Ru pu:Pu) then
+      local I1 I2 in
+	 I1={Determine Ru nil}
+	 I2={Determine Pu nil}
+	 {Append {Reorganise I1} {Reorganise I2}} 
+      end
+   end
+end
+	 fun{Create Opp K Times}
+      case K of road then realitem(kind:road
+				   p1:pt(x:{CreateOpp Opp x(0.0 0.0) Times} y:{CreateOpp Opp y(0.0 0.0) Times})
+				   p2:pt(x:{CreateOpp Opp x(1.0 0.0) Times} y:{CreateOpp Opp y(1.0 0.0) Times}))
+      [] building then realitem(kind:building
+				p1:pt(x:{CreateOpp Opp x(0.0 0.0) Times} y:{CreateOpp Opp y(0.0 0.0) Times})
+				p2:pt(x:{CreateOpp Opp x(0.0 1.0) Times} y:{CreateOpp Opp y(0.0 1.0) Times})
+				p3:pt(x:{CreateOpp Opp x(1.0 1.0) Times} y:{CreateOpp Opp y(1.0 1.0) Times})
+				p4:pt(x:{CreateOpp Opp x(1.0 0.0) Times} y:{CreateOpp Opp y(1.0 0.0) Times})
+			       )
+      [] water then  realitem(kind:water
+			      	p1:pt(x:{CreateOpp Opp x(0.0 0.0) Times} y:{CreateOpp Opp y(0.0 0.0) Times})
+				p2:pt(x:{CreateOpp Opp x(0.0 1.0) Times} y:{CreateOpp Opp y(0.0 1.0) Times})
+				p3:pt(x:{CreateOpp Opp x(1.0 1.0) Times} y:{CreateOpp Opp y(1.0 1.0) Times})
+				p4:pt(x:{CreateOpp Opp x(1.0 0.0) Times} y:{CreateOpp Opp y(1.0 0.0) Times})
+			     )
+      [] pokemon then pokeitem(kind:pokemon  position:pt(x:{CreateOpp Opp x(0.0 0.0) Times} y:{CreateOpp Opp y(0.0 0.0) Times}))
+      [] pokestop then pokeitem(kind:pokestop position:pt(x:{CreateOpp Opp x(0.0 0.0) Times} y:{CreateOpp Opp y(0.0 0.0) Times}))
+      [] arena then pokeitem(kind:arena position:pt(x:{CreateOpp Opp x(0.0 0.0) Times} y:{CreateOpp Opp y(0.0 0.0) Times}))
+      else nil
+      end
+   end
+	 fun{CreateOpp Opp Point Times}
+   case Opp of nil then
+      case Point of x(X Y) then {Calculate X Times}
+      [] y(X Y) then {Calculate Y Times}
+      end
+   [] H|T then
+      case H of trans(X Y) then
+	 case Point of x(X1 Y1) then
+	    {CreateOpp T x(plus(X1 X) plus(Y1 Y)) Times}
+	 [] y(X1 Y1) then
+	    {CreateOpp T y(plus(X1 X) plus(Y1 Y)) Times}
 	 end
-	 fun{Create Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 K Times LapsMin LapsMax}
-	    if {Float.toInt Times} < LapsMin orelse {Float.toInt Times} >= LapsMax then empty
-	    else
-	       
-	       case K of road then realitem(kind:road
-					    p1:pt(x:{Calculate Dx1 Times} y:{Calculate Dy1 Times})
-					    p2:pt(x:{Calculate Dx4 Times} y:{Calculate Dy4 Times}))
-	       [] building then realitem(kind:building
-					 p1:pt(x:{Calculate Dx1 Times} y:{Calculate Dy1 Times})
-					 p2:pt(x:{Calculate Dx2 Times} y:{Calculate Dy2 Times})
-					 p3:pt(x:{Calculate Dx3 Times} y:{Calculate Dy3 Times})
-					 p4:pt(x:{Calculate Dx4 Times} y:{Calculate Dy4 Times})
-					)
-	       [] water then  realitem(kind:water
-				       p1:pt(x:{Calculate Dx1 Times} y:{Calculate Dy1 Times})
-				       p2:pt(x:{Calculate Dx2 Times} y:{Calculate Dy2 Times})
-				       p3:pt(x:{Calculate Dx3 Times} y:{Calculate Dy3 Times})
-				       p4:pt(x:{Calculate Dx4 Times} y:{Calculate Dy4 Times})
-				      )
-	       [] pokemon then pokeitem(kind:pokemon  position:pt(x:{Calculate Dx1 Times} y:{Calculate Dy1 Times}))
-	       [] pokestop then pokeitem(kind:pokestop position:pt(x:{Calculate Dx1 Times} y:{Calculate Dy1 Times}))
-	       [] arena then pokeitem(kind:arena position:pt(x:{Calculate Dx1 Times} y:{Calculate Dy1 Times}))
-	       else nil
-	       end
-	    end
+      [] scale(X Y) then
+	 case Point of x(X1 Y1) then
+	    {CreateOpp T x(mult(X1 X) mult(Y1 Y)) Times}
+	 [] y(X1 Y1) then
+	    {CreateOpp T y(mult(X1 X) mult(Y1 Y)) Times}
 	 end
-	 
+      [] rotate(T) then
+	 case Point of x(X1 Y1) then
+	    {CreateOpp T x(plus(mult(X1 cos(T)) mult(Y1 sin(T))) minus(mult(Y1 cos(T)) mult(X1 sin(T)))) Times}
+	 [] y(X1 Y1) then
+	    {CreateOpp T x(plus(mult(X1 cos(T)) mult(Y1 sin(T))) minus(mult(Y1 cos(T)) mult(X1 sin(T)))) Times}
+	 end
+      end
+   end
+end
 	 fun{Calculate Data Times}
 	    case Data of time then Times
 	    [] plus(X Y) then
@@ -91,45 +114,30 @@ in
 	    else Data
 	    end
 	 end
-	 fun{BuildFunc Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 K LapsMin LapsMax}
-	    fun{$ Times} {Create Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 K Times LapsMin LapsMax}  end
-	 end
+	 fun{BuildFunc Opp K}
+   fun{$ Times} {Create Opp  K Times}  end
+end
+
+	 fun{Determine Ru Opp}
+   case Ru of H|T then
+      case H of primitive(kind:K) then
+	 {BuildFunc Opp K}
+	 |{Determine T Opp}
+      [] translate(dx:X dy:Y 1:RU) then
+	 {Determine RU trans(X Y)|Opp}
+	 |{Determine T Opp}
+      [] scale(rx:X ry:Y 1:RU) then
+	 {Determine RU scale(X Y)|Opp}
+	 |{Determine T Opp}
+      [] rotate(angle:Theta 1:RU) then
+	 {Determine RU rotate(Theta)|Opp}
+	 |{Determine T Opp}
+      else nil
+      end
+   else nil
+   end
+end
 	 
-	 fun{Determine Ru Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 LapsMin LapsMax}
-	    case Ru of H|T then
-	       case H of primitive(kind:K) then
-		  {BuildFunc Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 K LapsMin LapsMax}
-		  |{Determine T Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 LapsMin LapsMax}
-	       [] translate(dx:X dy:Y 1:RU) then
-		  {Determine RU plus(Dx1 X) plus(Dy1 Y) plus(Dx2 X) plus(Dy2 Y) plus(Dx3 X) plus(Dy3 Y) plus(Dx4 X) plus(Dy4 Y) LapsMin LapsMax}
-		  |{Determine T Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 LapsMin LapsMax}
-	       [] scale(rx:X ry:Y 1:RU) then
-		  {Determine RU mult(Dx1 X) mult(Dy1 Y) mult(Dx2 X) mult(Dy2 Y) mult(Dx3 X) mult(Dy3 Y) mult(Dx4 X) mult(Dy4 Y) LapsMin LapsMax}
-		  |{Determine T Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 LapsMin LapsMax}
-	       [] rotate(angle:Theta 1:RU) then
-		  {Determine RU
-		   plus(mult(Dx1 cos(Theta)) mult(Dy1 sin(Theta))) minus(mult(Dy1 cos(Theta)) mult(Dx1 sin(Theta)))
-		   plus(mult(Dx2 cos(Theta)) mult(Dy2 sin(Theta))) minus(mult(Dy2 cos(Theta)) mult(Dx2 sin(Theta)))
-		   plus(mult(Dx3 cos(Theta)) mult(Dy3 sin(Theta))) minus(mult(Dy3 cos(Theta)) mult(Dx3 sin(Theta)))
-		   plus(mult(Dx4 cos(Theta)) mult(Dy4 sin(Theta))) minus(mult(Dy4 cos(Theta)) mult(Dx4 sin(Theta)))
-		   LapsMin LapsMax}
-		  |{Determine T Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 LapsMin LapsMax}
-	       [] spawn(tmin:MinTime1 tmax:MaxTime1 1:RU) then
-		  if MinTime1 > LapsMin andthen MaxTime1 < LapsMax then
-		     {Determine RU Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 MinTime1 MaxTime1}|{Determine T Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 0 MaxTime} % nouvelle intervalle avec deux nouvelles bornes
-		  elseif MinTime1 > LapsMin then
-		     {Determine RU Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 MinTime1 LapsMax}|{Determine T Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 0 MaxTime} % Juste la borne inférieure change
-		  elseif MaxTime1 < LapsMax then
-		     {Determine RU Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 LapsMin MaxTime1}|{Determine T Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 0 MaxTime} % Juste la borne inférieure change
-		  else
-		     {Determine RU Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 LapsMin LapsMax}|{Determine T Dx1 Dy1 Dx2 Dy2 Dx3 Dy3 Dx4 Dy4 0 MaxTime} % L'intervale exigé est plus grand que l'intervale courant
-		  end
-		  
-	       else nil
-	       end
-	    else nil
-	    end
-	 end
 % Reorganise lea liste passée en paramètre pour avoir une simple liste de record -- OK
 	 fun{Reorganise L}
 	    case L of H|T then
