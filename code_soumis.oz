@@ -20,7 +20,7 @@ local
 		    withCheckMapComplete:false
 		   )
 in
-   Map =map(ru:[translate(dx:100.0 dy:100.0 1:[scale(rx:10.0 ry:10.0 1:[primitive(kind:building)])])] pu:[spawn(tmin:3 tmax:8 1:[translate(dx:mult(10.0 time) dy:250.0 1:[primitive(kind:pokemon)])])])
+   Map =map(ru:[translate(dx:time dy:100.0 1:[scale(rx:10.0 ry:10.0 1:[primitive(kind:building)])])] pu:[spawn(tmin:3 tmax:8 1:[translate(dx:mult(10.0 time) dy:250.0 1:[primitive(kind:pokemon)])])])
   % map(ru:[translate(dx:plus(200.0 50.0) dy:mult(50.0 mult(5.0 cos(0.0))) 1:[scale(rx:100.0 ry:100.0 1:[primitive(kind:road)])]) scale(rx:200.0 ry:200.0 1:[primitive(kind:road) primitive(kind:building)])] pu:nil) %% TODO change the map here
 % Prends une liste de Ru en paramètre
 % Si le record traité est une primitive, alors le record est traité avec ses opérations précédentes dans le bon ordre, et est joint à la suite des autres records.
@@ -41,19 +41,19 @@ in
 	 end
 	 fun{Create Opp K Times LapsMin LapsMax}
 	    case K of road then realitem(kind:road
-					 p1:pt(x:{CreateOpp Opp x(0.0 0.0) Times} y:{CreateOpp Opp y(0.0 0.0) Times})
-					 p2:pt(x:{CreateOpp Opp x(1.0 0.0) Times} y:{CreateOpp Opp y(1.0 0.0) Times}))
+					 p1:pt(x:{CreateOpp Opp x(0.0 0.0) 0.0} y:{CreateOpp Opp y(0.0 0.0) 0.0})
+					 p2:pt(x:{CreateOpp Opp x(1.0 0.0) 0.0} y:{CreateOpp Opp y(1.0 0.0) 0.0}))
 	    [] building then realitem(kind:building
-				      p1:pt(x:{CreateOpp Opp x(0.0 0.0) Times} y:{CreateOpp Opp y(0.0 0.0) Times})
-				      p2:pt(x:{CreateOpp Opp x(0.0 1.0) Times} y:{CreateOpp Opp y(0.0 1.0) Times})
-				      p3:pt(x:{CreateOpp Opp x(1.0 1.0) Times} y:{CreateOpp Opp y(1.0 1.0) Times})
-				      p4:pt(x:{CreateOpp Opp x(1.0 0.0) Times} y:{CreateOpp Opp y(1.0 0.0) Times})
+				      p1:pt(x:{CreateOpp Opp x(0.0 0.0) 0.0} y:{CreateOpp Opp y(0.0 0.0) 0.0})
+				      p2:pt(x:{CreateOpp Opp x(0.0 1.0) 0.0} y:{CreateOpp Opp y(0.0 1.0) 0.0})
+				      p3:pt(x:{CreateOpp Opp x(1.0 1.0) 0.0} y:{CreateOpp Opp y(1.0 1.0) 0.0})
+				      p4:pt(x:{CreateOpp Opp x(1.0 0.0) 0.0} y:{CreateOpp Opp y(1.0 0.0) 0.0})
 				     )
 	    [] water then  realitem(kind:water
-				    p1:pt(x:{CreateOpp Opp x(0.0 0.0) Times} y:{CreateOpp Opp y(0.0 0.0) Times})
-				    p2:pt(x:{CreateOpp Opp x(0.0 1.0) Times} y:{CreateOpp Opp y(0.0 1.0) Times})
-				    p3:pt(x:{CreateOpp Opp x(1.0 1.0) Times} y:{CreateOpp Opp y(1.0 1.0) Times})
-				    p4:pt(x:{CreateOpp Opp x(1.0 0.0) Times} y:{CreateOpp Opp y(1.0 0.0) Times})
+				    p1:pt(x:{CreateOpp Opp x(0.0 0.0) 0.0} y:{CreateOpp Opp y(0.0 0.0) 0.0})
+				    p2:pt(x:{CreateOpp Opp x(0.0 1.0) 0.0} y:{CreateOpp Opp y(0.0 1.0) 0.0})
+				    p3:pt(x:{CreateOpp Opp x(1.0 1.0) 0.0} y:{CreateOpp Opp y(1.0 1.0) 0.0})
+				    p4:pt(x:{CreateOpp Opp x(1.0 0.0) 0.0} y:{CreateOpp Opp y(1.0 0.0) 0.0})
 				   )
 	    else
 	       if {Float.toInt Times} < LapsMin orelse {Float.toInt Times} >= LapsMax then empty
