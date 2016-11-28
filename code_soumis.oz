@@ -4,8 +4,8 @@
 % Noms : (Charlier,Gilles)-(Fiset,Alexandre)
 %====MODULELINK====%
 declare
-[Projet]={Module.link ["/home/alexandre/Bureau/info2_projet/Projet2016.ozf"]}
-{Property.put 'MyDir' '/home/alexandre/Bureau/info2_projet/'}
+[Projet]={Module.link ["/home/gilles/SugarPicker/Projet2016.ozf"]}
+{Property.put 'MyDir' '/home/gilles/SugarPicker/'}
 %====CODE====%
 local
    MaxTime = 10 % nombre de frame à l'animation
@@ -19,8 +19,48 @@ local
 		    withCheckMapEasy:false
 		    withCheckMapComplete:false
 		   )
+   RU=[translate(dx:~500.0 dy:~500.0 1:[scale(rx:2000.0 ry:2000.0 1:[primitive(kind:water)])])%Background
+       translate(dx:0.0 dy:0.0 1:[scale(rx:500.0 ry:25.0 1:[primitive(kind:building)])])
+       translate(dx:0.0 dy:475.0 1:[scale(rx:500.0 ry:25.0 1:[primitive(kind:building)])])
+       translate(dx:0.0 dy:0.0 1:[scale(rx:25.0 ry:500.0 1:[primitive(kind:building)])])
+       translate(dx:475.0 dy:0.0 1:[scale(rx:25.0 ry:500.0 1:[primitive(kind:building)])])
+       translate(dx:225.0 dy:25.0 1:[scale(rx:50.0 ry:75.0 1:[primitive(kind:building)])])%1
+       translate(dx:125.0 dy:50.0 1:[scale(rx:75.0 ry:50.0 1:[primitive(kind:building)])])
+       translate(dx:300.0 dy:50.0 1:[scale(rx:75.0 ry:50.0 1:[primitive(kind:building)])])
+       translate(dx:125.0 dy:125.0 1:[scale(rx:75.0 ry:25.0 1:[primitive(kind:building)])])%2
+       translate(dx:300.0 dy:125.0 1:[scale(rx:75.0 ry:25.0 1:[primitive(kind:building)])])
+       translate(dx:50.0 dy:50.0 1:[scale(rx:50.0 ry:50.0 1:[primitive(kind:building)])])%3
+       translate(dx:400.0 dy:50.0 1:[scale(rx:50.0 ry:50.0 1:[primitive(kind:building)])])
+       translate(dx:50.0 dy:125.0 1:[scale(rx:50.0 ry:25.0 1:[primitive(kind:building)])])%4
+       translate(dx:225.0 dy:125.0 1:[scale(rx:50.0 ry:25.0 1:[primitive(kind:building)])])
+       translate(dx:400.0 dy:125.0 1:[scale(rx:50.0 ry:25.0 1:[primitive(kind:building)])])
+       translate(dx:125.0 dy:350.0 1:[scale(rx:50.0 ry:25.0 1:[primitive(kind:building)])])
+       translate(dx:325.0 dy:350.0 1:[scale(rx:50.0 ry:25.0 1:[primitive(kind:building)])])
+       translate(dx:37.5 dy:37.5 1:[scale(rx:175.0 ry:0.0 1:[primitive(kind:road)])])%road
+       translate(dx:150.0 dy:175.0 1:[scale(rx:25.0 ry:200.0 1:[primitive(kind:building)])])%5
+       translate(dx:325.0 dy:175.0 1:[scale(rx:25.0 ry:200.0 1:[primitive(kind:building)])])
+       translate(dx:200.0 dy:175.0 1:[scale(rx:25.0 ry:100.0 1:[primitive(kind:building)])])%6
+       translate(dx:275.0 dy:175.0 1:[scale(rx:25.0 ry:100.0 1:[primitive(kind:building)])])
+       translate(dx:200.0 dy:250.0 1:[scale(rx:100.0 ry:25.0 1:[primitive(kind:building)])])%7
+       translate(dx:25.0 dy:175.0 1:[scale(rx:100.0 ry:150.0 1:[primitive(kind:building)])])%8
+       translate(dx:375.0 dy:175.0 1:[scale(rx:100.0 ry:150.0 1:[primitive(kind:building)])])
+       translate(dx:200.0 dy:300.0 1:[scale(rx:100.0 ry:75.0 1:[primitive(kind:building)])])%9
+       translate(dx:25.0 dy:350.0 1:[scale(rx:75.0 ry:100.0 1:[primitive(kind:building)])])
+       translate(dx:400.0 dy:350.0 1:[scale(rx:75.0 ry:100.0 1:[primitive(kind:building)])])
+       translate(dx:125.0 dy:400.0 1:[scale(rx:250.0 ry:50.0 1:[primitive(kind:building)])])%10
+       translate(dx:~2.0 dy:~2.0 1:[scale(rx:1.0 ry:1.0 1:[translate(dx:231.25 dy:206.25 1:[scale(rx:6.25 ry:18.75 1:[primitive(kind:building)])])%PACMAN
+							   translate(dx:237.5 dy:200.0 1:[scale(rx:6.25 ry:15.625 1:[primitive(kind:building)])])
+							   translate(dx:237.5 dy:221.875 1:[scale(rx:6.25 ry:9.375 1:[primitive(kind:building)])])
+							   translate(dx:243.75 dy:212.5 1:[scale(rx:6.25 ry:25.0 1:[primitive(kind:building)])])
+							   translate(dx:250.0 dy:218.75 1:[scale(rx:6.25 ry:18.75 1:[primitive(kind:building)])])
+							   translate(dx:256.25 dy:212.5 1:[scale(rx:6.25 ry:25.0 1:[primitive(kind:building)])])
+							   translate(dx:262.25 dy:200.0 1:[scale(rx:6.25 ry:31.25 1:[primitive(kind:building)])])
+							   translate(dx:268.75 dy:206.25 1:[scale(rx:5.75 ry:18.75 1:[primitive(kind:building)])])])])
+       %%ECRITURE PACMAN
+      ]
+   PU=nil
 in
-   Map =map(ru:[translate(dx:time dy:100.0 1:[scale(rx:10.0 ry:10.0 1:[primitive(kind:building)])])] pu:[spawn(tmin:3 tmax:8 1:[translate(dx:mult(10.0 time) dy:250.0 1:[primitive(kind:pokemon)])])])
+   Map=map(ru:RU pu:PU)
   % map(ru:[translate(dx:plus(200.0 50.0) dy:mult(50.0 mult(5.0 cos(0.0))) 1:[scale(rx:100.0 ry:100.0 1:[primitive(kind:road)])]) scale(rx:200.0 ry:200.0 1:[primitive(kind:road) primitive(kind:building)])] pu:nil) %% TODO change the map here
 % Prends une liste de Ru en paramètre
 % Si le record traité est une primitive, alors le record est traité avec ses opérations précédentes dans le bon ordre, et est joint à la suite des autres records.
@@ -83,11 +123,11 @@ in
 		  [] y(X1 Y1) then
 		     {CreateOpp T y(mult(X1 X) mult(Y1 Y)) Times}
 		  end
-	       [] rotate(T) then
+	       [] rotate(Theta) then
 		  case Point of x(X1 Y1) then
-		     {CreateOpp T x(plus(mult(X1 cos(T)) mult(Y1 sin(T))) minus(mult(Y1 cos(T)) mult(X1 sin(T)))) Times}
+		     {CreateOpp T x(plus(mult(X1 cos(Theta)) mult(Y1 sin(Theta))) minus(mult(Y1 cos(Theta)) mult(X1 sin(Theta)))) Times}
 		  [] y(X1 Y1) then
-		     {CreateOpp T y(plus(mult(X1 cos(T)) mult(Y1 sin(T))) minus(mult(Y1 cos(T)) mult(X1 sin(T)))) Times}
+		     {CreateOpp T y(plus(mult(X1 cos(Theta)) mult(Y1 sin(Theta))) minus(mult(Y1 cos(Theta)) mult(X1 sin(Theta)))) Times}
 		  end
 	       end
 	    end
