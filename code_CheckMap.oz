@@ -27,15 +27,15 @@ fun{CheckMap Map}
 	       else false
 	       end
 	    [] scale(rx:Rx ry:Ry 1:Ru) then
-	       if {CheckFormule Rx} andthen {CheckFormule Ry} then {CheckRu Ru}
+	       if {CheckFormule Rx false} andthen {CheckFormule Ry false} then {CheckRu Ru}
 	       else false
 	       end
 	    [] translate(dx:Dx dy:Dy 1:Ru ) then
-	       if {CheckFormule Dx} andthen {CheckFormule Dy} then {CheckRu Ru}
+	       if {CheckFormule Dx false} andthen {CheckFormule Dy false} then {CheckRu Ru}
 	       else false
 	       end
 	    [] rotate(angle:Theta 1:Ru) then
-	       if {CheckFormule Theta} then {CheckRu Ru}
+	       if {CheckFormule Theta false} then {CheckRu Ru}
 	       else false
 	       end
 	    else false
@@ -54,7 +54,7 @@ fun{CheckMap Map}
 	       else false
 	       end
 	    []translate(dx:Dx dy:Dy 1:Pu) then
-	       if {CheckFormule Dy} andthen {CheckFormule Dx} then {CheckPu Pu}
+	       if {CheckFormule Dy true} andthen {CheckFormule Dx true} then {CheckPu Pu}
 	       else false
 	       end
 	    [] spawn(tmin:X tmax:Y 1:Pu) then
@@ -66,10 +66,12 @@ fun{CheckMap Map}
 	 else false
 	 end
       end
-      fun{CheckFormule F}
+      fun{CheckFormule F flag}
 	 if {Float.is F} then true
 	 else
-	    case F of time then true
+	    case F of time then
+	       if flag then true
+	       else false
 	    [] plus(X Y) then
 	       if {CheckFormule X} andthen {CheckFormule Y} then true
 	       else false
