@@ -18,47 +18,63 @@ local
 		    withTimeWindow:true
 		    withCheckMapEasy:true
 		    withCheckMapComplete:true
-		   )
+		   )       %%ECRITURE PACMAN
    RU=[translate(dx:~500.0 dy:~500.0 1:[scale(rx:2000.0 ry:2000.0 1:[primitive(kind:water)])])%Background
-       translate(dx:0.0 dy:0.0 1:[scale(rx:500.0 ry:25.0 1:[primitive(kind:building)])])
-       translate(dx:0.0 dy:475.0 1:[scale(rx:500.0 ry:25.0 1:[primitive(kind:building)])])
-       translate(dx:0.0 dy:0.0 1:[scale(rx:25.0 ry:500.0 1:[primitive(kind:building)])])
-       translate(dx:475.0 dy:0.0 1:[scale(rx:25.0 ry:500.0 1:[primitive(kind:building)])])
-       translate(dx:225.0 dy:25.0 1:[scale(rx:50.0 ry:75.0 1:[primitive(kind:building)])])%1
-       translate(dx:125.0 dy:50.0 1:[scale(rx:75.0 ry:50.0 1:[primitive(kind:building)])])
-       translate(dx:300.0 dy:50.0 1:[scale(rx:75.0 ry:50.0 1:[primitive(kind:building)])])
-       translate(dx:125.0 dy:125.0 1:[scale(rx:75.0 ry:25.0 1:[primitive(kind:building)])])%2
-       translate(dx:300.0 dy:125.0 1:[scale(rx:75.0 ry:25.0 1:[primitive(kind:building)])])
-       translate(dx:50.0 dy:50.0 1:[scale(rx:50.0 ry:50.0 1:[primitive(kind:building)])])%3
-       translate(dx:400.0 dy:50.0 1:[scale(rx:50.0 ry:50.0 1:[primitive(kind:building)])])
-       translate(dx:50.0 dy:125.0 1:[scale(rx:50.0 ry:25.0 1:[primitive(kind:building)])])%4
-       translate(dx:225.0 dy:125.0 1:[scale(rx:50.0 ry:25.0 1:[primitive(kind:building)])])
-       translate(dx:400.0 dy:125.0 1:[scale(rx:50.0 ry:25.0 1:[primitive(kind:building)])])
-       translate(dx:125.0 dy:350.0 1:[scale(rx:50.0 ry:25.0 1:[primitive(kind:building)])])
-       translate(dx:325.0 dy:350.0 1:[scale(rx:50.0 ry:25.0 1:[primitive(kind:building)])])
-       translate(dx:37.5 dy:37.5 1:[scale(rx:175.0 ry:0.0 1:[primitive(kind:road)])])%road
-       translate(dx:150.0 dy:175.0 1:[scale(rx:25.0 ry:200.0 1:[primitive(kind:building)])])%5
-       translate(dx:325.0 dy:175.0 1:[scale(rx:25.0 ry:200.0 1:[primitive(kind:building)])])
-       translate(dx:200.0 dy:175.0 1:[scale(rx:25.0 ry:100.0 1:[primitive(kind:building)])])%6
-       translate(dx:275.0 dy:175.0 1:[scale(rx:25.0 ry:100.0 1:[primitive(kind:building)])])
-       translate(dx:200.0 dy:250.0 1:[scale(rx:100.0 ry:25.0 1:[primitive(kind:building)])])%7
-       translate(dx:25.0 dy:175.0 1:[scale(rx:100.0 ry:150.0 1:[primitive(kind:building)])])%8
-       translate(dx:375.0 dy:175.0 1:[scale(rx:100.0 ry:150.0 1:[primitive(kind:building)])])
-       translate(dx:200.0 dy:300.0 1:[scale(rx:100.0 ry:75.0 1:[primitive(kind:building)])])%9
-       translate(dx:25.0 dy:350.0 1:[scale(rx:75.0 ry:100.0 1:[primitive(kind:building)])])
-       translate(dx:400.0 dy:350.0 1:[scale(rx:75.0 ry:100.0 1:[primitive(kind:building)])])
-       translate(dx:125.0 dy:400.0 1:[scale(rx:250.0 ry:50.0 1:[primitive(kind:building)])])%10
-       translate(dx:~2.0 dy:~2.0 1:[scale(rx:1.0 ry:1.0 1:[translate(dx:231.25 dy:206.25 1:[scale(rx:6.25 ry:18.75 1:[primitive(kind:building)])])%PACMAN
-							   translate(dx:237.5 dy:200.0 1:[scale(rx:6.25 ry:15.625 1:[primitive(kind:building)])])
-							   translate(dx:237.5 dy:221.875 1:[scale(rx:6.25 ry:9.375 1:[primitive(kind:building)])])
-							   translate(dx:243.75 dy:212.5 1:[scale(rx:6.25 ry:25.0 1:[primitive(kind:building)])])
-							   translate(dx:250.0 dy:218.75 1:[scale(rx:6.25 ry:18.75 1:[primitive(kind:building)])])
-							   translate(dx:256.25 dy:212.5 1:[scale(rx:6.25 ry:25.0 1:[primitive(kind:building)])])
-							   translate(dx:262.25 dy:200.0 1:[scale(rx:6.25 ry:31.25 1:[primitive(kind:building)])])
-							   translate(dx:268.75 dy:206.25 1:[scale(rx:5.75 ry:18.75 1:[primitive(kind:building)])])])])
-       %%ECRITURE PACMAN
-      ]
-   PU=[spawn(tmin:6 tmax:8 1:[spawn(tmin:2 tmax:8 1:[translate(dx:50.0 dy:50.0 1:[primitive(kind:pokemon)])])])]
+       translate(dx:0.0 dy:0.0 1:[scale(rx:500.0 ry:15.0 1:[primitive(kind:building)])])
+       translate(dx:0.0 dy:485.0 1:[scale(rx:500.0 ry:15.0 1:[primitive(kind:building )])])
+       translate(dx:485.0 dy:0.0 1:[scale(rx:15.0 ry:500.0 1:[primitive(kind:building )])])
+       translate(dx:0.0 dy:0.0 1:[scale(rx:15.0 ry:500.0 1:[primitive(kind:building )])])
+       translate(dx:235.0 dy:15.0 1:[scale(rx:20.0 ry:65.0 1:[primitive(kind:building )])])%39
+       translate(dx:46.0 dy:45.0 1:[scale(rx:55.0 ry:32.0 1:[primitive(kind:building )])])%1
+       translate(dx:400.0 dy:45.0 1:[scale(rx:55.0 ry:32.0 1:[primitive(kind:building )])])%4
+       translate(dx:130.0 dy:45.0 1:[scale(rx:75.0 ry:32.0 1:[primitive(kind:building )])])%2
+       translate(dx:292.0 dy:45.0 1:[scale(rx:75.0 ry:32.0 1:[primitive(kind:building )])])%3
+       translate(dx:45.0 dy:109.0 1:[scale(rx:55.0 ry:16.0 1:[primitive(kind:building )])])%5
+       translate(dx:135.0 dy:107.0 1:[scale(rx:18.0 ry:112.0 1:[primitive(kind:building)])])%6
+       translate(dx:135.0 dy:153.0 1:[scale(rx:72.0 ry:16.0 1:[primitive(kind:building)])])%7
+       translate(dx:187.0 dy:107.0 1:[scale(rx:126.0 ry:16.0 1:[primitive(kind:building)])])%8
+       translate(dx:239.0 dy:107.0 1:[scale(rx:18.0 ry:80.0 1:[primitive(kind:building)])])%9
+       translate(dx:347.0 dy:107.0 1:[scale(rx:18.0 ry:112.0 1:[primitive(kind:building)])])%10
+       translate(dx:292.0 dy:155.0 1:[scale(rx:55.0 ry:16.0 1:[primitive(kind:building)])])%11
+       translate(dx:395.0 dy:155.0 1:[scale(rx:90.0 ry:64.0 1:[primitive(kind:building)])])%12
+       translate(dx:400.0 dy:107.0 1:[scale(rx:55.0 ry:16.0 1:[primitive(kind:building)])])%13
+       translate(dx:395.0 dy:251.0 1:[scale(rx:90.0 ry:64.0 1:[primitive(kind:building)])])%14
+       translate(dx:347.0 dy:251.0 1:[scale(rx:18.0 ry:64.0 1:[primitive(kind:building)])])%15
+       translate(dx:187.0 dy:297.0 1:[scale(rx:126.0 ry:16.0 1:[primitive(kind:building)])])%16
+       translate(dx:239.0 dy:297.0 1:[scale(rx:18.0 ry:80.0 1:[primitive(kind:building)])])%17
+       translate(dx:187.0 dy:258.0 1:[scale(rx:126.0 ry:10.0 1:[primitive(kind:building)])])%18
+       translate(dx:187.0 dy:203.0 1:[scale(rx:10.0 ry:64.0 1:[primitive(kind:building)])])%19
+       translate(dx:187.0 dy:203.0 1:[scale(rx:36.0 ry:10.0 1:[primitive(kind:building)])])%20
+       translate(dx:271.0 dy:203.0 1:[scale(rx:36.0 ry:10.0 1:[primitive(kind:building)])])%21
+       translate(dx:302.0 dy:203.0 1:[scale(rx:10.0 ry:64.0 1:[primitive(kind:building)])])%22
+       translate(dx:135.0 dy:251.0 1:[scale(rx:18.0 ry:64.0 1:[primitive(kind:building)])])%23
+       translate(dx:15.0 dy:155.0 1:[scale(rx:90.0 ry:64.0 1:[primitive(kind:building)])])%24
+       translate(dx:15.0 dy:251.0 1:[scale(rx:90.0 ry:64.0 1:[primitive(kind:building)])])%25
+       translate(dx:46.0 dy:345.0 1:[scale(rx:54.0 ry:16.0 1:[primitive(kind:building)])])%26
+       translate(dx:81.0 dy:345.0 1:[scale(rx:18.0 ry:64.0 1:[primitive(kind:building)])])%27
+       translate(dx:135.0 dy:394.0 1:[scale(rx:18.0 ry:64.0 1:[primitive(kind:building)])])%28
+       translate(dx:46.0 dy:441.0 1:[scale(rx:162.0 ry:16.0 1:[primitive(kind:building)])])%29
+       translate(dx:135.0 dy:345.0 1:[scale(rx:72.0 ry:16.0 1:[primitive(kind:building)])])%30
+       translate(dx:15.0 dy:392.0 1:[scale(rx:36.0 ry:16.0 1:[primitive(kind:building)])])%31
+       translate(dx:187.0 dy:395.0 1:[scale(rx:126.0 ry:16.0 1:[primitive(kind:building)])])%32
+       translate(dx:239.0 dy:395.0 1:[scale(rx:18.0 ry:64.0 1:[primitive(kind:building)])])%33
+       translate(dx:347.0 dy:392.0 1:[scale(rx:18.0 ry:64.0 1:[primitive(kind:building)])])%34
+       translate(dx:293.0 dy:441.0 1:[scale(rx:162.0 ry:16.0 1:[primitive(kind:building)])])%35
+       translate(dx:293.0 dy:345.0 1:[scale(rx:72.0 ry:16.0 1:[primitive(kind:building)])])%36
+       translate(dx:400.0 dy:345.0 1:[scale(rx:18.0 ry:64.0 1:[primitive(kind:building)])])%37
+       translate(dx:449.0 dy:393.0 1:[scale(rx:36.0 ry:16.0 1:[primitive(kind:building)])])%38
+       translate(dx:400.0 dy:345.0 1:[scale(rx:54.0 ry:16.0 1:[primitive(kind:building)])])%39
+       translate(dx:225.0 dy:207.0 1:[scale(rx:46.0 ry:1.0 1:[primitive(kind:road)])])%X
+       
+	     
+	     
+	     
+	    
+	     
+	    
+	     
+	     ]
+   PU=nil
 in
   Map=map(ru:RU pu:PU)
   % map(ru:[translate(dx:plus(200.0 50.0) dy:mult(50.0 mult(5.0 cos(0.0))) 1:[scale(rx:100.0 ry:100.0 1:[primitive(kind:road)])]) scale(rx:200.0 ry:200.0 1:[primitive(kind:road) primitive(kind:building)])] pu:nil) %% TODO change the map here
@@ -210,7 +226,7 @@ in
       end
    end
    fun{CheckMap Map}
-      local CheckRu CheckPu CheckList CheckFormule in
+   /*   local CheckRu CheckPu CheckList CheckFormule in
 	 fun{CheckList Rp Case}
 	    case Rp of nil then true
 	    [] X|Y then
@@ -363,7 +379,8 @@ in
 	    end
 	 else false
 	 end	 
-      end
+	end*/
+      false
    end
    {Projet.run MyFunction Map MaxTime Extensions CheckMap}
 end
