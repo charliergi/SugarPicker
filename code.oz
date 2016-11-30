@@ -8,7 +8,7 @@ declare
 {Property.put 'MyDir' '/home/alexandre/Bureau/info2_projet/'}
 %====CODE====%
 local
-   MaxTime = 10 % nombre de frame à l'animation
+   MaxTime = 52 % nombre de frame à l'animation
    MyFunction
    Map
    CheckMap
@@ -18,30 +18,32 @@ local
 		    withTimeWindow:true
 		    withCheckMapEasy:true
 		    withCheckMapComplete:true
-		   )      
+		   )       
    RU=[translate(dx:neg(500.0) dy:neg(500.0) 1:[scale(rx:2000.0 ry:2000.0 1:[primitive(kind:water)])])%Background
        translate(dx:0.0 dy:0.0 1:[scale(rx:500.0 ry:15.0 1:[primitive(kind:building)])])
        translate(dx:0.0 dy:485.0 1:[scale(rx:500.0 ry:15.0 1:[primitive(kind:building )])])
-       translate(dx:485.0 dy:0.0 1:[scale(rx:15.0 ry:500.0 1:[primitive(kind:building )])])
-       translate(dx:0.0 dy:0.0 1:[scale(rx:15.0 ry:500.0 1:[primitive(kind:building )])])
+       translate(dx:485.0 dy:0.0 1:[scale(rx:15.0 ry:219.0 1:[primitive(kind:building )])])
+       translate(dx:485.0 dy:250.0 1:[scale(rx:15.0 ry:250.0 1:[primitive(kind:building )])])
+       translate(dx:0.0 dy:0.0 1:[scale(rx:15.0 ry:219.0 1:[primitive(kind:building )])])
+       translate(dx:0.0 dy:250.0 1:[scale(rx:15.0 ry:250.0 1:[primitive(kind:building )])])
        translate(dx:235.0 dy:15.0 1:[scale(rx:20.0 ry:65.0 1:[primitive(kind:building )])])%39
        translate(dx:46.0 dy:45.0 1:[scale(rx:55.0 ry:32.0 1:[primitive(kind:building )])])%1
        translate(dx:400.0 dy:45.0 1:[scale(rx:55.0 ry:32.0 1:[primitive(kind:building )])])%4
        translate(dx:130.0 dy:45.0 1:[scale(rx:75.0 ry:32.0 1:[primitive(kind:building )])])%2
        translate(dx:292.0 dy:45.0 1:[scale(rx:75.0 ry:32.0 1:[primitive(kind:building )])])%3
        translate(dx:45.0 dy:109.0 1:[scale(rx:55.0 ry:16.0 1:[primitive(kind:building )])])%5
-       translate(dx:135.0 dy:107.0 1:[scale(rx:18.0 ry:112.0 1:[primitive(kind:building)])])%6
        translate(dx:135.0 dy:153.0 1:[scale(rx:72.0 ry:16.0 1:[primitive(kind:building)])])%7
-       translate(dx:187.0 dy:107.0 1:[scale(rx:126.0 ry:16.0 1:[primitive(kind:building)])])%8
+       translate(dx:135.0 dy:107.0 1:[scale(rx:18.0 ry:112.0 1:[primitive(kind:building)])])%6
        translate(dx:239.0 dy:107.0 1:[scale(rx:18.0 ry:65.0 1:[primitive(kind:building)])])%9
+       translate(dx:187.0 dy:107.0 1:[scale(rx:126.0 ry:16.0 1:[primitive(kind:building)])])%8
        translate(dx:347.0 dy:107.0 1:[scale(rx:18.0 ry:112.0 1:[primitive(kind:building)])])%10
        translate(dx:292.0 dy:155.0 1:[scale(rx:55.0 ry:16.0 1:[primitive(kind:building)])])%11
        translate(dx:395.0 dy:155.0 1:[scale(rx:90.0 ry:64.0 1:[primitive(kind:building)])])%12
        translate(dx:400.0 dy:107.0 1:[scale(rx:55.0 ry:16.0 1:[primitive(kind:building)])])%13
        translate(dx:395.0 dy:251.0 1:[scale(rx:90.0 ry:64.0 1:[primitive(kind:building)])])%14
        translate(dx:347.0 dy:251.0 1:[scale(rx:18.0 ry:64.0 1:[primitive(kind:building)])])%15
-       translate(dx:187.0 dy:297.0 1:[scale(rx:126.0 ry:16.0 1:[primitive(kind:building)])])%16
        translate(dx:239.0 dy:297.0 1:[scale(rx:18.0 ry:64.0 1:[primitive(kind:building)])])%17
+       translate(dx:187.0 dy:297.0 1:[scale(rx:126.0 ry:16.0 1:[primitive(kind:building)])])%16
        translate(dx:187.0 dy:258.0 1:[scale(rx:126.0 ry:10.0 1:[primitive(kind:building)])])%18
        translate(dx:187.0 dy:203.0 1:[scale(rx:10.0 ry:64.0 1:[primitive(kind:building)])])%19
        translate(dx:187.0 dy:203.0 1:[scale(rx:36.0 ry:10.0 1:[primitive(kind:building)])])%20
@@ -56,56 +58,57 @@ local
        translate(dx:46.0 dy:441.0 1:[scale(rx:162.0 ry:16.0 1:[primitive(kind:building)])])%29
        translate(dx:135.0 dy:345.0 1:[scale(rx:72.0 ry:16.0 1:[primitive(kind:building)])])%30
        translate(dx:15.0 dy:392.0 1:[scale(rx:36.0 ry:16.0 1:[primitive(kind:building)])])%31
-       translate(dx:187.0 dy:395.0 1:[scale(rx:126.0 ry:16.0 1:[primitive(kind:building)])])%32
        translate(dx:239.0 dy:395.0 1:[scale(rx:18.0 ry:64.0 1:[primitive(kind:building)])])%33
+       translate(dx:187.0 dy:395.0 1:[scale(rx:126.0 ry:16.0 1:[primitive(kind:building)])])%32
        translate(dx:347.0 dy:392.0 1:[scale(rx:18.0 ry:64.0 1:[primitive(kind:building)])])%34
        translate(dx:293.0 dy:441.0 1:[scale(rx:162.0 ry:16.0 1:[primitive(kind:building)])])%35
        translate(dx:293.0 dy:345.0 1:[scale(rx:72.0 ry:16.0 1:[primitive(kind:building)])])%36
+       translate(dx:400.0 dy:345.0 1:[scale(rx:54.0 ry:16.0 1:[primitive(kind:building)])])%39
        translate(dx:400.0 dy:345.0 1:[scale(rx:18.0 ry:64.0 1:[primitive(kind:building)])])%37
        translate(dx:449.0 dy:393.0 1:[scale(rx:36.0 ry:16.0 1:[primitive(kind:building)])])%38
-       translate(dx:400.0 dy:345.0 1:[scale(rx:54.0 ry:16.0 1:[primitive(kind:building)])])%39
        translate(dx:225.0 dy:207.0 1:[scale(rx:46.0 ry:1.0 1:[primitive(kind:road)])])%40
-       
-	     
-	     
-	     
-	    
-	     
-	    
-	     
       ]
-   PU=[translate(dx:248.0 dy:376.0 1:[spawn(tmin:0 tmax:5 1:[translate(dx:mult(18.0 neg(time)) dy:0.0 1:[ primitive(kind:pokemon)])])])%1
-       translate(dx:0.0 dy:mult(16.0 minus(time 5.0)) 1:[spawn(tmin:5 tmax:8 1:[translate(dx:176.0 dy:394.0 1:[ primitive(kind:pokemon)])])])%2
-     %  translate(dx:mult(18.0 minus(time 8.0) dy:0.0) 1:[spawn(tmin:8 tmax:10 1:[translate(dx:194.0 dy:442.0 1:[ primitive(kind:pokemon)])])])%3
-       translate(dx:248.0 dy:189.0 1:[primitive(kind:arena)])
+   PU=[translate(dx:252.0 dy:377.0 1:[spawn(tmin:0 tmax:5 1:[translate(dx:mult(18.0 neg(time)) dy:0.0 1:[ primitive(kind:pokemon)])])])%1
+       translate(dx:0.0 dy:mult(16.0 minus(time 5.0)) 1:[spawn(tmin:5 tmax:8 1:[translate(dx:172.0 dy:377.0 1:[ primitive(kind:pokemon)])])])%2
+       translate(dx:mult(18.0 minus(time 8.0)) dy:0.0 1:[spawn(tmin:8 tmax:11 1:[translate(dx:172.0 dy:425.0 1:[ primitive(kind:pokemon)])])])%3
+       translate(dx:0.0 dy:mult(16.0 minus(time 11.0)) 1:[spawn(tmin:11 tmax:14 1:[translate(dx:225.0 dy:425.0 1:[ primitive(kind:pokemon)])])])%4
+       translate(dx:mult(18.0 neg(minus(time 14.0))) dy:0.0 1:[spawn(tmin:14 tmax:25 1:[translate(dx:225.0 dy:473.0 1:[ primitive(kind:pokemon)])])])%5
+       translate(dx:0.0 dy:mult(16.0 neg(minus(time 25.0))) 1:[spawn(tmin:25 tmax:28 1:[translate(dx:31.0 dy:470.0 1:[ primitive(kind:pokemon)])])])%6
+       translate(dx:mult(18.0 minus(time 28.0)) dy:0.0 1:[spawn(tmin:28 tmax:33 1:[translate(dx:31.0 dy:426.0 1:[ primitive(kind:pokemon)])])])%7
+       translate(dx:0.0 dy:mult(16.0 neg(minus(time 33.0))) 1:[spawn(tmin:33 tmax:45 1:[translate(dx:119.0 dy:426.0 1:[ primitive(kind:pokemon)])])])%8
+       translate(dx:mult(18.0 neg(minus(time 45.0))) dy:0.0 1:[spawn(tmin:45 tmax:52 1:[translate(dx:119.0 dy:235.0 1:[ primitive(kind:pokemon)])])])%9
+      
+       
+       translate(dx:248.0 dy:189.0 1:[spawn(tmin:0 tmax:5 1:[translate(dx:mult(18.0 neg(time)) dy:0.0 1:[ primitive(kind:arena)])])])%10
+       translate(dx:0.0 dy:mult(16.0 minus(time 5.0)) 1:[spawn(tmin:5 tmax:8 1:[translate(dx:170.0 dy:189.0 1:[ primitive(kind:arena)])])])%11
+       translate(dx:mult(18.0 neg(minus(time 8.0))) dy:0.0 1:[spawn(tmin:8 tmax:11 1:[translate(dx:170.0 dy:236.0 1:[ primitive(kind:arena)])])])%12
+       translate(dx:0.0 dy:mult(16.0 minus(time 11.0)) 1:[spawn(tmin:11 tmax:23 1:[translate(dx:119.0 dy:236.0 1:[ primitive(kind:arena)])])])%13
+       translate(dx:mult(18.0 neg(minus(time 23.0))) dy:0.0 1:[spawn(tmin:23 tmax:28 1:[translate(dx:119.0 dy:425.0 1:[ primitive(kind:arena)])])])%14
        translate(dx:215.0 dy:235.0 1:[primitive(kind:arena)])
        translate(dx:250.0 dy:235.0 1:[primitive(kind:arena)])
        translate(dx:285.0 dy:235.0 1:[primitive(kind:arena)])
        translate(dx:31.0 dy:30.0 1:[primitive(kind:pokestop)])
-       translate(dx:31.0 dy:470.0 1:[primitive(kind:pokestop)])
+       translate(dx:31.0 dy:470.0 1:[spawn(tmin:0 tmax:25 1:[primitive(kind:pokestop)])])
        translate(dx:469.0 dy:30.0 1:[primitive(kind:pokestop)])
        translate(dx:469.0 dy:470.0 1:[primitive(kind:pokestop)])
       ]
 in
    Map=map(ru:RU pu:PU)
-  % map(ru:[translate(dx:plus(200.0 50.0) dy:mult(50.0 mult(5.0 cos(0.0))) 1:[scale(rx:100.0 ry:100.0 1:[primitive(kind:road)])]) scale(rx:200.0 ry:200.0 1:[primitive(kind:road) primitive(kind:building)])] pu:nil) %% TODO change the map here
-% Prends une liste de Ru en paramètre
-% Si le record traité est une primitive, alors le record est traité avec ses opérations précédentes dans le bon ordre, et est joint à la suite des autres records.
-% Sinon, selon le record traité, effectue des opérations correspondantes sur les coordonnées de la future primitive traitée. -- OK
-   
+   %La fonction prend en paramètre une map et retourne une liste de fonction renvoyant un item.
    fun{MyFunction Map}
-      local Determine Create Separate Reorganise BuildFunc Calculate CreateOpp in 
-	 % Lance la fonction Determine sur la liste Ru et Pu de la map. -- OK
+      local Determine Create Separate Reorganise BuildFunc Calculate CreateOpp Turn in 
+	 %Lance la fonction Determine sur la liste Ru et Pu de la map.
 	 fun{Separate Map}
 	    case Map of nil then nil
 	    [] map(ru:Ru pu:Pu) then
 	       local I1 I2 in
 		  I1={Determine Ru nil 0 0}
 		  I2={Determine Pu nil 0 MaxTime+1}
-		  {Append {Reorganise I1} {Reorganise I2}} 
+		  {Reorganise [I1 I2] nil}
 	       end
 	    end
 	 end
+	 %Permet de determiner quelle item la fonction dois renvoyer, ainsi que de lancer la fonction qui permettra de calculer les points suivant la liste d'opperation passe en argument.
 	 fun{Create Opp K Times LapsMin LapsMax}
 	    case K of road then realitem(kind:road
 					 p1:pt(x:{CreateOpp Opp x(0.0 0.0) 0.0} y:{CreateOpp Opp y(0.0 0.0) 0.0})
@@ -132,6 +135,7 @@ in
 	       end
 	    end
 	 end
+	 %Permet de convertir en operation comprehensible pour la fonction calculate. 
 	 fun{CreateOpp Opp Point Times}
 	    case Opp of nil then
 	       case Point of x(X Y) then {Calculate X Times}
@@ -159,6 +163,7 @@ in
 	       end
 	    end
 	 end
+	 %Permet de calculer les opperations de base, ou de introduire le variable de temps dans l'item.
 	 fun{Calculate Data Times}
 	    case Data of time then Times
 	    [] plus(X Y) then
@@ -185,10 +190,12 @@ in
 	    else Data
 	    end
 	 end
+	 %Permet de cree une fonction qui prend en parametre la variable de temps et renvoit un item.
 	 fun{BuildFunc Opp K LapsMin LapsMax}
 	    fun{$ Times} {Create Opp  K Times LapsMin LapsMax}  end
 	 end
-	 
+	 %Permet de stocker les oppérations dans un accumulateur (Opp), les oppération sont stocké en respectant l'ordre deep-first.
+	 %Permet aussi de traiter le cas du spawn pour les pokeitems.
 	 fun{Determine Ru Opp LapsMin LapsMax}
 	    case Ru of H|T then
 	       case H of primitive(kind:K) then
@@ -220,24 +227,29 @@ in
 	    end
 	 end
 	 
-% Reorganise lea liste passée en paramètre pour avoir une simple liste de record -- OK
-	 fun{Reorganise L}
-	    case L of nil then nil
+         % Reorganise la liste passee en parametre pour avoir une simple liste de record 
+	 fun{Reorganise L Acc}
+	    case L of nil then {Turn Acc nil}
+	    [] nil|T then {Reorganise T Acc}
+	    [] (H1|T1)|T then {Reorganise H1|T1|T Acc}
+	    [] X|T then {Reorganise T X|Acc}
+	    else L
+	    end
+	 end
+	 % Permet de retouner une liste, afin de spawn les items dans le bon ordre.
+	 fun{Turn L Acc}
+	    case L of nil then Acc
 	    [] H|T then
-	       case H of H1|T1 then
-		  {Append  {Append {Reorganise H1} {Reorganise T1}} {Reorganise T}}
-	       else
-		  {Append [H] {Reorganise T}}
-	       end
-	    else
-	       [L]
+	       {Turn T H|Acc}
 	    end
 	 end
 	 {Separate Map}
       end
    end
+   %Permet de vérifier si une map est correctemment ecrite.
    fun{CheckMap Map}
       local CheckRu CheckPu CheckList CheckFormule in
+	 %Permet de savoir si on doit utiliser la fonction CheckRu ou CheckPu.
 	 fun{CheckList Rp Case}
 	    case Rp of nil then true
 	    [] X|Y then
@@ -253,7 +265,8 @@ in
 	       end
 	    else false
 	    end
-	 end	  
+	 end
+	 % Regarde si un RealUnivers est bien implemente.
 	 fun{CheckRu Ru}
 	    case Ru of nil then  true
 	    [] X|Y then 
@@ -280,7 +293,7 @@ in
 	    else false
 	    end
 	 end
-	 
+	 % Regarde Si les PokeUnivers sont correctements implemente.
 	 fun {CheckPu Pu}
 	    case Pu of nil then true
 	    [] X|Y then
@@ -303,79 +316,81 @@ in
 	    else false
 	    end
 	 end
-	 fun{CheckFormule F Flag}
+	 % Perme de regarder si une Formula ou une Value est correctement implementé
+	 fun{CheckFormule F flag}
 	    if {Float.is F} then true
 	    else
 	       case F of time then
-		  if Flag==true then true
+		  if flag==true then true
 		  else false
 		  end
+		  
 	       [] plus(X Y) then
-		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
+		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
 		  else false
 		  end
 	       [] minus(X Y) then
-		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
+		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
 		  else false
 		  end
 	       [] mult(X Y) then
-		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
+		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
 		  else false
 		  end
 	       [] 'div'(X Y) then
-		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
+		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
 		  else false
 		  end
 	       [] sin(X) then
-		  if {CheckFormule X Flag} then true
+		  if {CheckFormule X flag} then true
 		  else false
 		  end
 	       [] cos(X) then
-		  if {CheckFormule X Flag} then true
+		  if {CheckFormule X flag} then true
 		  else false
 		  end
 	       [] tan(X) then
-		  if {CheckFormule X Flag} then true
+		  if {CheckFormule X flag} then true
 		  else false
 		  end
 	       [] exp(X) then
-		  if {CheckFormule X Flag} then true
+		  if {CheckFormule X flag} then true
 		  else false
 		  end
 	       [] log(X) then
-		  if {CheckFormule X Flag} then true
+		  if {CheckFormule X flag} then true
 		  else false
 		  end
 	       [] neg(X) then
-		  if {CheckFormule X Flag} then true
+		  if {CheckFormule X flag} then true
 		  else false
 		  end
 	       [] ite(X Y Z) then
-		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} andthen {CheckFormule Z Flag} then true
+		  if {CheckFormule X flag} andthen {CheckFormule Y flag} andthen {CheckFormule Z flag} then true
 		  else false
 		  end
 	       [] eq(X Y) then
-		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
+		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
 		  else false
 		  end
 	       [] ne(X Y) then
-		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
+		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
 		  else false
 		  end
 	       [] lt(X Y) then
-		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
+		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
 		  else false
 		  end
 	       [] le(X Y) then
-		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
+		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
 		  else false
 		  end
 	       [] gt(X Y) then
-		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
+		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
 		  else false
 		  end
 	       [] ge(X Y) then
-		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
+		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
 		  else false
 		  end
 	       else false
