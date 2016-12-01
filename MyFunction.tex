@@ -1,0 +1,75 @@
+
+
+\subsection{Fonctionnement général :}
+La fonction de base  doit renvoyer une liste de realitems et de pokeitems dans un ordre bien défini et cela, à partir d'une map passée en paramètre. Pour ce faire, nous avons séparé notre fonction de base en plusieurs sous-fonctions.
+\begin{itemize}
+    \item Séparer les ru et les pu:
+    \begin{itemize}
+        \item Solution : fonction Separate.
+        \item Nouveau problème : traiter les fonctions imbriquées dans les ru et les pu pour une primitive. 
+        \end{itemize}
+    \item Traiter les RU et PU imbriqués:
+    \begin{itemize}
+        \item Solution : fonction Determine.
+        \item Nouveau problème : création de fonction dépendante d'un argument.
+    \end{itemize}
+    \item Création de la fonction renvoyant chaque item:
+    \begin{itemize}
+        \item Solution : fonction BuildFunc.
+        \item Nouveau problème : déterminer quel item la fonction doit renvoyer.
+    \end{itemize}
+    \item Détermination de l'item:
+    \begin{itemize}
+        \item Solution : fonction Create.
+        \item Nouveau problème : les opérations pour le calcul des coordonnées en accord avec les règles mathématiques.
+    \end{itemize}
+    \item Respect des règles mathématiques:
+    \begin{itemize}
+        \item Solution : fonction CreateOpp.
+        \item Nouveau problème : les fonctions mathématiques de base doivent être traitées pour obtenir une valeur ou une variable dans le cas des pokeitems.
+    \end{itemize}
+    \item Résolution des opérations de base :
+    \begin{itemize}
+        \item Solution : Calculate.
+    \end{itemize}
+\end{itemize}
+Pour plus de facilité nous allons décortiquer les fonctions dans le sens bottom-up.
+\subsection{Calculate :}
+Cette fonction prend en paramètre une Value ou une Formula determinée par la fonction CreateOpp ainsi qu'un Times déterminé par le fonction BuildFunc pour retourner un Float ou le Times. Cette fonction nous sert donc à évaluer une formule pour renvoyer un simple Float aux méthodes suivantes.
+
+La fonction n'est pas récursive terminal, mais nous n'avons pas trouvé d'autre moyen de l'implémenter.
+
+\\Dans le cas le plus simple, la Formula vaut Times, et rentre directement dans le cas de base.
+La complexité temporelle est alors : $f(n) \in$  $\Theta(1)$. Dans le pire des cas, lorsque l'utilisateur utilise le record possédant 3 valeurs (ite) et que ces dernières sont aussi des record "ite", nous pouvons généraliser en disant qu'il y aura $3^n$ fois l'appel à la fonction Calculate si il y a une profondeur de n "ite" pour chaque valeur du premier appel : la complexité s'élève alors à $f(n) \in$  $O(3^n)$. Nous pourrions d'ailleurs représenter cette structure d'appels en utilisant un arbre ternaire complet.
+
+\subsection{CreateOpp :}
+Cette fonction prend en paramètre une liste d'opérations, créée par la fonction Determine, un record déterminé par la fonction Create, et le Times de la fonction BuildFunc. Cette fonction renvoie ensuite le Times modifié ou un float après avoir appelé la fonction Calculate.
+\\Si nous ne tenons pas en compte la complexité temporelle de Calculate. Si nous analysons le meilleur et le pire cas, nous remarquons que nous avons une complexité temporelle asymptotique en $f(n) \in$ $O(n)$. Si nous analysons plus en profondeur en prenant en compte l'appel à la fonction Calculate, nous remarquons que la fonction CreateOpp dans les meilleurs (translate et scale) cas rajoute $m$ imbrication si la liste est de longueur $m$ et $2m$ dans les pires cas ( rotate ). Ce qui fait une complexité total $\Omega(n)$ pour les meilleurs cas et $O(n^2)$ si n représente le nombre d'imbrication dans Calculate plus la longueur de la liste d'opérations.
+\subsection{Create :}
+Cette fonction prend en paramètre la liste d'opérations et un kind déterminés tous deux par la fonction Determine. Elle possède aussi en paramètre le Times, ainsi que l'interval de temps courant, exprimé par deux variables : LapsMin et LapsMax. Create retourne ensuite un realitem ou un pokeitem.
+\\La création des "Points" utilisés par la fonction CreateOpp s'effectue selon la règle suivante :
+\begin{itemize}
+
+    \item Tout Point est sous forme de record P(X Y).
+    \item P : le label du record informe sur quelle variable nous travaillons dans le point pt.
+    \item X  Y : des variables qui gardent en mémoire la variation de x et y du point pt afin de pouvoir appliquer un rotate sur les coordonnées du point courant.
+\end{itemize}
+\\Afin d'éviter toute erreur de la part de l'utilisateur, les appels de la fonction CreateOpp à l'intérieur des realitems se font avec un Times égal à 0.0. Grâce à cette manipulation, les pokemons garderont leur emplacement initial au cas ou un time est présent dans les opérations du realuniverse.
+\\Le temps minimum et maximum quant à eux sont uniquement utilisés pour les pokeitems afin que la fonction Create ne renvoie que le record durant l'intervalle courant et empty dans les autres cas.
+\\Si nous ne tenons pas compte des appels vers d'autres méthodes telles que CreateOpp, Create possède une complexité asymptotique de l'ordre de $f(n) \in$ $\Theta(1)$  car elle n'a que pour but de créer un record en laissant CreateOpp définir ses coordonnées.
+\subsection{BuildFunc :}
+Cette fonction prend en paramètre la liste de fonction, un kind, un temps minimum et maximum déterminé par Determine. Afin de renvoyer une fonction dépendante d'un argument Times qui contient un item après l'appel à la fonction Creat.
+\\Une fois de plus, la fonction place juste un record passé en argument dans une fonction anonyme et appelle une autre méthode. La complexité de BuildFunc s'exprime donc telle que $f(n) \in$ $\Theta(1)$. Les opérations se font en temps constant.
+\subsection{Determine :}
+Cette fonction prend en argument un Ru ou un Pu déterminés par la fonction Separate ainsi que trois accumulateur, une liste, un temps minimal et un temps maximal. Les accumulateurs sont initialisés à nil, le temps initial(0) et le temps maximal(MaxTime+1). Pourquoi MaxTime+1 ? Car cette opération est nécessaire pour afficher jusqu'au temps Times=10. Notre implémentation de base ne passait pas sur Inginious dans le cas contraire.
+
+\subsection{Separate :}
+La fonction  Separate prend une Map en paramètre, et renvoie une liste de fonctions renvoyant chacunes un Ru ou un Pu. Cette méthode est donc particulièrement efficace car elle nous sert à lancer les différents appels nécessaires à l'exécution du code. Nous aurions pu intégrer ces appels directement dans MyFunction sans passer par une méthode intermédiaire, mais nous trouvions l'implémentation actuelle plus claire et plus logique.
+\\Mis à part les différents appels, la fonction Seprate possède une complexité temporelle de $f(n) \in$ $\Theta(1)$. Les opérations s'effectuent en temps constant et aucun appel récursif n'est effectué.
+\subsection{Reorganise :}
+La fonction Reorganise prend une liste de fonctions et de listes imbriquées en paramètre et retourne une liste propre sans imbrication. Elle pourrait être comparée à la méthode Flatten. Par contre, nous avons redéfini nous-même cette fonction car elle était nécessaire à l'implémentation de notre code.
+\\ La complexité de cette fonction s'élève à $f(n) \in$ $\Theta(n)$ en considérant que n représente le nombre d'éléments, toute profondeur confondue, dans la liste passée en argument. Elle s'effectue en $\Theta(n)$ tout simplement car elle va parcourir tous les éléments de la liste de manière récursive.
+\subsection{Turn :}
+Prend une liste en paramètre et renvoie cette même liste inversée. Cette méthode parcourt tous les éléments de manière récursive et les ajoute simplement au début de l'accumulateur, pour ensuite le renvoyer.
+\subsection{Informations complémentaires :}
+Concernant notre implémentions, une map sur le thème du célèbre jeu PACMAN a été fournie avec le code. Afin de conserver une certaine cohérence avec le thème de la carte, nous avons décidé de remplacer les gifs de base par des gifs personnalisés. Ces derniers se trouvent également dans le dossier soumis sur Inginious, je vous invite donc à les utiliser.

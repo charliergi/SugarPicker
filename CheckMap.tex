@@ -1,0 +1,16 @@
+Le fonction CheckMap est construite pour regarder si chaque niveau de map est bien implémenter.
+Les différents niveau sont :
+\begin{itemize}
+    \item le record map => map(ru:... pu:...)
+    \item la liste de RealUniverse ou la liste de PokeUniverse. 
+    \item Les Formula ou les Value.
+\end{itemize}
+\subsection{CheckList :}
+Cette fonction permet de s'assurer que la valeur de ru ou pu est bien associé à une liste de RealUniverse ou de PokeUniverse.L'argument Case permet de savoir si nous somme normalement en présence d'une liste de RealUnviverse ou de PokeUniverse.
+\\Sa complexité temporelle est de $\Theta(n)$ si on lui donne une liste de longueur n.
+\subsection{CheckRu et CheckPu}
+Cette fonction permet de s'assurer si nous somme bien présence d'un RealUniverse.
+\\Sa complexité temporelle dans le meilleur cas est de $\Omega(n)$ si n est la longueur de la liste Ru . Mais est de $O(n^2)$ si nous avons m succession de Ru dans les Ru, et que n>m.
+\subsection{CheckFormule :}
+Cette fonction permet de s'assurer que les Values ou les Formulas sont bien définie, le booléen permet de savoir si nous traitons une Formula ou une Value.
+\\Dans le meilleur des cas nous obtenons une complexité temporelle $\Omega(1)$ si F est un float ou un time.Dans le pire cas, nous avons une complexité temporelle de $O(3^n)$ si n représente le nombre d'imbrication maximum de Formulas ou Values.
