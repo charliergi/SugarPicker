@@ -94,10 +94,10 @@ local
       ]
 in
    Map=map(ru:RU pu:PU)
-   %La fonction prend en paramètre une map et retourne une liste de fonction renvoyant un item.
+   % La fonction prend en paramètre une map et retourne une liste de fonction renvoyant un item.
    fun{MyFunction Map}
       local Determine Create Separate Reorganise BuildFunc Calculate CreateOpp Turn in 
-	 %Lance la fonction Determine sur la liste Ru et Pu de la map.
+	 % Lance la fonction Determine sur la liste Ru et Pu de la map.
 	 fun{Separate Map}
 	    case Map of nil then nil
 	    [] map(ru:Ru pu:Pu) then
@@ -108,7 +108,8 @@ in
 	       end
 	    end
 	 end
-	 %Permet de determiner quelle item la fonction dois renvoyer, ainsi que de lancer la fonction qui permettra de calculer les points suivant la liste d'opperation passe en argument.
+			% Determine quel item la fonction doit renvoyer, et lance la fonction Createopp avec les coordonnées de base de l'item chosi.
+			% Remplace l'item par empty si Times n'est pas compris dans l'intervalle [LapsMin;LapsMax[.
 	 fun{Create Opp K Times LapsMin LapsMax}
 	    case K of road then realitem(kind:road
 					 p1:pt(x:{CreateOpp Opp x(0.0 0.0) 0.0} y:{CreateOpp Opp y(0.0 0.0) 0.0})
@@ -135,7 +136,7 @@ in
 	       end
 	    end
 	 end
-	 %Permet de convertir en operation comprehensible pour la fonction calculate. 
+	 % Convertit la liste Opp en une unique operation comprehensible pour la fonction calculate. 
 	 fun{CreateOpp Opp Point Times}
 	    case Opp of nil then
 	       case Point of x(X Y) then {Calculate X Times}
@@ -163,7 +164,7 @@ in
 	       end
 	    end
 	 end
-	 %Permet de calculer les opperations de base, ou de introduire le variable de temps dans l'item.
+	 % Calcule les opperations de base, ou d'introduire la variable de temps dans l'item.
 	 fun{Calculate Data Times}
 	    case Data of time then Times
 	    [] plus(X Y) then
@@ -190,12 +191,12 @@ in
 	    else Data
 	    end
 	 end
-	 %Permet de cree une fonction qui prend en parametre la variable de temps et renvoit un item.
+	 % Cree une fonction qui prend en parametre la variable de temps et renvoit un item.
 	 fun{BuildFunc Opp K LapsMin LapsMax}
 	    fun{$ Times} {Create Opp  K Times LapsMin LapsMax}  end
 	 end
-	 %Permet de stocker les oppérations dans un accumulateur (Opp), les oppération sont stocké en respectant l'ordre deep-first.
-	 %Permet aussi de traiter le cas du spawn pour les pokeitems.
+	 % Stocke les oppérations dans un accumulateur (Opp), les oppération sont stocké en respectant l'ordre deep-first.
+	 % Traite le cas du spawn pour les pokeitems.
 	 fun{Determine Ru Opp LapsMin LapsMax}
 	    case Ru of H|T then
 	       case H of primitive(kind:K) then
@@ -236,7 +237,7 @@ in
 	    else L
 	    end
 	 end
-	 % Permet de retouner une liste, afin de spawn les items dans le bon ordre.
+	 % Retourne une liste, afin de spawn les items dans le bon ordre.
 	 fun{Turn L Acc}
 	    case L of nil then Acc
 	    [] H|T then
@@ -246,10 +247,10 @@ in
 	 {Separate Map}
       end
    end
-   %Permet de vérifier si une map est correctemment ecrite.
+   % Vérifie si une map est correctemment ecrite.
    fun{CheckMap Map}
       local CheckRu CheckPu CheckList CheckFormule in
-	 %Permet de savoir si on doit utiliser la fonction CheckRu ou CheckPu.
+	% Determine si on doit utiliser la fonction CheckRu ou CheckPu.
 	 fun{CheckList Rp Case}
 	    case Rp of nil then true
 	    [] X|Y then
@@ -293,7 +294,7 @@ in
 	    else false
 	    end
 	 end
-	 % Regarde Si les PokeUnivers sont correctements implemente.
+	 % Regarde si les PokeUnivers sont correctements implemente.
 	 fun {CheckPu Pu}
 	    case Pu of nil then true
 	    [] X|Y then
@@ -316,7 +317,7 @@ in
 	    else false
 	    end
 	 end
-	 % Perme de regarder si une Formula ou une Value est correctement implementé
+	 % Regarde si une Formula ou une Value est correctement implementé
 	 fun{CheckFormule F Flag}
 	    if {Float.is F} then true
 	    else
