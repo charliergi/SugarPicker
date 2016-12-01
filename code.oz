@@ -265,7 +265,7 @@ in
 	       end
 	    else false
 	    end
-	 end
+	 end	  
 	 % Regarde si un RealUnivers est bien implemente.
 	 fun{CheckRu Ru}
 	    case Ru of nil then  true
@@ -317,80 +317,79 @@ in
 	    end
 	 end
 	 % Perme de regarder si une Formula ou une Value est correctement implementé
-	 fun{CheckFormule F flag}
+	 fun{CheckFormule F Flag}
 	    if {Float.is F} then true
 	    else
 	       case F of time then
-		  if flag==true then true
+		  if Flag==true then true
 		  else false
 		  end
-		  
 	       [] plus(X Y) then
-		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
+		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
 		  else false
 		  end
 	       [] minus(X Y) then
-		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
+		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
 		  else false
 		  end
 	       [] mult(X Y) then
-		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
+		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
 		  else false
 		  end
 	       [] 'div'(X Y) then
-		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
+		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
 		  else false
 		  end
 	       [] sin(X) then
-		  if {CheckFormule X flag} then true
+		  if {CheckFormule X Flag} then true
 		  else false
 		  end
 	       [] cos(X) then
-		  if {CheckFormule X flag} then true
+		  if {CheckFormule X Flag} then true
 		  else false
 		  end
 	       [] tan(X) then
-		  if {CheckFormule X flag} then true
+		  if {CheckFormule X Flag} then true
 		  else false
 		  end
 	       [] exp(X) then
-		  if {CheckFormule X flag} then true
+		  if {CheckFormule X Flag} then true
 		  else false
 		  end
 	       [] log(X) then
-		  if {CheckFormule X flag} then true
+		  if {CheckFormule X Flag} then true
 		  else false
 		  end
 	       [] neg(X) then
-		  if {CheckFormule X flag} then true
+		  if {CheckFormule X Flag} then true
 		  else false
 		  end
 	       [] ite(X Y Z) then
-		  if {CheckFormule X flag} andthen {CheckFormule Y flag} andthen {CheckFormule Z flag} then true
+		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} andthen {CheckFormule Z Flag} then true
 		  else false
 		  end
 	       [] eq(X Y) then
-		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
+		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
 		  else false
 		  end
 	       [] ne(X Y) then
-		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
+		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
 		  else false
 		  end
 	       [] lt(X Y) then
-		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
+		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
 		  else false
 		  end
 	       [] le(X Y) then
-		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
+		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
 		  else false
 		  end
 	       [] gt(X Y) then
-		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
+		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
 		  else false
 		  end
 	       [] ge(X Y) then
-		  if {CheckFormule X flag} andthen {CheckFormule Y flag} then true
+		  if {CheckFormule X Flag} andthen {CheckFormule Y Flag} then true
 		  else false
 		  end
 	       else false
